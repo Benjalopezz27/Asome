@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_elements_dropdowns",
+  "info": {
+    "displayName": "Dropdown"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "Links": {
+      "type": "component",
+      "component": "elements.navbar-links",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

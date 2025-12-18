@@ -1,0 +1,45 @@
+version: '3'
+services:
+  # Base de Datos (Postgres)
+  asome-db:
+    image: postgres:15-alpine
+    container_name: asome_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - asome-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Backend (Strapi)
+  asome-backend:
+    container_name: asome_backend
+    build: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: asome-db # <--- OJO: Esto conecta con el servicio de arriba
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+    volumes:
+      - ./backend/config:/opt/app/config
+      - ./backend/src:/opt/app/src
+      - ./backend/public/uploads:/opt/app/public/uploads
+      - /opt/app/node_modules
+    ports:
+      - "1337:1337"
+    depends_on:
+      - asome-db
+
+volumes:
+  asome-db-data:
