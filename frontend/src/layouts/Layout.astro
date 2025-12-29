@@ -1,8 +1,8 @@
 ---
 import "../styles/global.css";
-import Header from "@/components/shared/Header";
+import Header from "@/components/common/Header";
 import { getNavbarData } from "../lib/data";
-import Footer from "@/components/shared/Footer.astro";
+import Footer from "@/components/common/Footer.astro";
 const { menuItems, cta } = await getNavbarData();
 ---
 
@@ -18,6 +18,7 @@ const { menuItems, cta } = await getNavbarData();
   <body>
     <Header client:load menuItems={menuItems} ctaButton={cta} />
     <slot />
+
     <Footer />
   </body>
 </html>

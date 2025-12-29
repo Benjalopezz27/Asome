@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_blocks_newsletters",
+  "collectionName": "components_blocks_stats_sections",
   "info": {
-    "displayName": "Newsletter"
+    "displayName": "StatsSection"
   },
   "options": {},
   "attributes": {
@@ -11,13 +11,15 @@
     "description": {
       "type": "text"
     },
-    "placeholder": {
-      "type": "string"
+    "stats": {
+      "type": "component",
+      "component": "elements.stats-card",
+      "repeatable": true
     },
     "buttonText": {
       "type": "string"
     },
-    "name": {
+    "buttonUrl": {
       "type": "string"
     }
   },

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_elements_stats_cards",
+  "info": {
+    "displayName": "StatsCard"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "integer"
+    },
+    "suffix": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -47,6 +47,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
         )
       }
       className="flex items-center justify-between font-semibold text-lg text-black"
+      suppressHydrationWarning={true} // <--- AÑADE ESTO
     >
       {item.label.toUpperCase()}
 
@@ -79,7 +80,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
           key={subLink.id}
           href={subLink.url}
           onClick={() => handleLinkClick(subLink.url)}
-          className="block text-gray-600 text-base transition-colors hover:text-primary-blue"
+          className="block text-gray-600 text-base transition-colors duration-200 hover:font-bold hover:text-black "
         >
           {subLink.label}
         </a>
@@ -107,7 +108,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
           {ctaButton && (
             <a
               href={ctaButton.url}
-              className="mt-10 bg-dark-blue text-white font-bold py-3 rounded-md text-center hover:bg-[#1C39BB] transition-colors"
+              className="mt-10 bg-dark-blue text-white font-bold py-3 rounded-md text-center bg-[#011F5B] hover:bg-[#1C39BB] transition-colors"
               onClick={() => handleLinkClick(ctaButton.url)}
             >
               {ctaButton.label.toUpperCase()}
@@ -126,7 +127,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
               return (
                 <li key={item.id} className="relative group">
                   <button
-                    className={`flex items-center gap-1 text-sm font-bold tracking-wide hover:text-[#1C39BB]  transition-colors ${
+                    className={`flex items-center gap-1 text-sm font-black  hover:text-[#1C39BB]  transition-colors  ${
                       item.Links?.some(l => l.url === active) ? 'text-[#1C39BB]' : 'text-black'
                     }`}
                   >
@@ -142,7 +143,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
                         <a
                           key={subLink.id}
                           href={subLink.url}
-                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#1C39BB] transition-colors"
+                          className="block px-4 py-3 text-sm text-gray-700 hover:font-bold hover:text-black transition-all duration-200"
                           onClick={() => setActive(subLink.url)}
                         >
                           {subLink.label}
@@ -161,7 +162,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton }: NavbarProps
                   href={item.url}
                   className={`${
                     active === item.url ? 'text-[#1C39BB]' : 'text-black'
-                  } text-sm font-bold tracking-wide hover:text-[#1C39BB] transition-colors`}
+                  } text-sm font-black hover:text-[#1C39BB] transition-colors`}
                   onClick={() => setActive(item.url)}
                 >
                   {item.label.toUpperCase()}

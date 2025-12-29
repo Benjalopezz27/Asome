@@ -5,6 +5,71 @@
   padding-inline: 1rem;
 }
 
+@font-face {
+    font-family: "Maax Regular";
+    src: url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.eot");
+    src: url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.svg#Maax Regular")format("svg");
+}
+@font-face {
+    font-family: "Maax Bold";
+    src: url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.eot");
+    src: url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.svg#Maax Bold")format("svg");
+}
+body {
+  font-family: "Maax Regular";
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: "Maax Bold";
+}
+span 
+{
+  font-family: "Maax Bold";
+}
+
+/* --- PRIMARY BLUE --- */
+.primary-blue {
+    color: #1C39BB;
+    transition: color 0.3s ease;
+}
 
 
+.bg-primary-blue {
+    background-color: #1C39BB;
+    transition: background-color 0.3s ease;
+}
 
+
+/* --- SECONDARY BLUE --- */
+.secondary-blue {
+    color: #6495ED;
+}
+
+
+.bg-secondary-blue {
+    background-color: #6495ED;
+}
+
+
+/* --- DARK BLUE --- */
+.dark-blue {
+    color: #011F5B;
+}
+
+
+.bg-dark-blue {
+    background-color: #011F5B;
+}
+
+
+/* --- WHITE SMOKE --- */
+.white-smoke {
+    color: #F5F5F5;
+}

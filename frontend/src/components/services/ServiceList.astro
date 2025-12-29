@@ -1,0 +1,36 @@
+---
+import { ChevronDown } from "lucide-react";
+import type { Service } from "../../types/index";
+import Badge from "../shared/badge.astro";
+import ServiceCard from "../shared/ServiceCard.astro";
+
+interface Props {
+  badge: string;
+  title: string;
+  services: Service[];
+}
+
+const { badge, title, services } = Astro.props;
+---
+
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Cabecera de la categoría */}
+    <div class="flex flex-col items-center space-y-4 mb-16 text-center">
+      <Badge title={badge} />
+      <h2
+        class="text-3xl md:text-[40px] font-extrabold text-gray-900 max-w-xl mx-auto leading-tight"
+      >
+        {title}
+      </h2>
+      <div class="mt-4 secondary-blue animate-bounce">
+        <ChevronDown className="size-8 stroke-3" />
+      </div>
+    </div>
+
+    {/* Lista de Servicios */}
+    <div class="space-y-24">
+      {services?.map((service) => <ServiceCard service={service} />)}
+    </div>
+  </div>
+</section>

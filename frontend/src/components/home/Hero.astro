@@ -1,0 +1,92 @@
+---
+import Badge from "../shared/badge.astro";
+
+// src/components/blocks/Hero.astro
+
+interface Image {
+  data: {
+    attributes: {
+      url: string;
+      alternativeText?: string;
+    };
+  };
+}
+
+interface Props {
+  titleImage: Image;
+  subtitle?: string;
+  backgroundImage?: Image;
+  buttonText?: string;
+  buttonUrl?: string;
+}
+
+const { titleImage, subtitle, backgroundImage, buttonText, buttonUrl } =
+  Astro.props;
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+const titleImageUrl = titleImage?.url ? `${STRAPI_URL}${titleImage.url}` : null;
+const backgroundImageUrl = backgroundImage?.url
+  ? `${STRAPI_URL}${backgroundImage.url}`
+  : null;
+const altText = titleImage?.alternativeText || "Frase principal";
+---
+
+<section
+  class="relative min-h-150 flex items-center justify-center text-center text-white h-[80%] md:h-[90%] overflow-hidden"
+>
+  {
+    backgroundImageUrl && (
+      <div class="absolute inset-0 z-0">
+        <img
+          src={backgroundImageUrl}
+          alt="Fondo"
+          class="w-full h-full object-cover"
+        />
+        {/* Capa oscura para mejorar la legibilidad */}
+        <div class="absolute inset-0 opacity-50" />
+      </div>
+    )
+  }
+
+  <div
+    class="relative z-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-16"
+  >
+    <Badge
+      title="Software, diseño y marketing basado para escalar tu empresa"
+      class="text-white border border-white bg-white/20 rounded-md px-2 py-1 text-sm w-1/2"
+    />
+
+    {
+      titleImageUrl && (
+        <img
+          src={titleImageUrl}
+          alt={altText}
+          class="w-full max-w-4xl h-auto mb-8"
+        />
+      )
+    }
+    <div>
+      {
+        buttonText && buttonUrl && (
+          <a
+            href={buttonUrl}
+            class="relative overflow-hidden primary-blue font-bold bg-white rounded-lg px-5 py-3 text-md lg:text-xl cursor-pointer group"
+          >
+            <span class="absolute inset-0 bg-[#1C39BB] transform scale-x-0 origin-left transition-transform rounded-lg duration-300 ease-in-out group-hover:scale-x-100" />
+
+            <span class="relative z-10 transition-colors  duration-300 ease-in-out group-hover:text-white">
+              {buttonText}
+            </span>
+          </a>
+        )
+      }
+      {
+        subtitle && (
+          <p class="text-sm md:text-base font-light max-w-2xl mt-5">
+            {subtitle}
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>

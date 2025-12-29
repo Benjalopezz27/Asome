@@ -1,0 +1,56 @@
+---
+// src/pages/proyectos/[slug].astro
+import Layout from "../../layouts/Layout.astro";
+import { ArrowLeft } from "lucide-react";
+import { marked } from "marked"; // Necesitarás: npm install marked
+
+// 1. Importa tus funciones de datos
+// Asegúrate de que estas funciones existan en tu lib/data.ts como definimos anteriormente
+import { getProjects } from "../../lib/data";
+import type { Project } from "@/types";
+import HeroPages from "@/components/common/HeroPages.astro";
+
+// 2. getStaticPaths: Genera las rutas en tiempo de build
+export async function getStaticPaths() {
+  // Obtenemos TODOS los proyectos
+  const projects = await getProjects();
+
+  // Retornamos un array de objetos con params (para la URL) y props (para la página)
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }, // Pasamos el proyecto entero para no tener que volver a buscarlo
+  }));
+}
+
+// 3. Recibir los datos del proyecto actual
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+// Convertir descripción markdown a HTML si es necesario
+const descriptionHtml = project.description
+  ? marked.parse(project.description)
+  : "";
+---
+
+<Layout title={`${project.title} | Proyectos`}>
+  <main class="bg-white">
+    {/* Header / Hero del Proyecto */}
+    <HeroPages title={project.title} description={project.introduction} />
+
+    {/* Contenido Principal del Proyecto (Descripción completa) */}
+    <section class="py-20 px-4 max-w-4xl mx-auto">
+      <div class="prose prose-lg prose-blue mx-auto">
+        {/* Renderizamos el contenido rico (Markdown/HTML) */}
+        <div set:html={descriptionHtml} />
+      </div>
+    </section>
+
+    {
+      /* Aquí irían tus componentes de Fases (ProjectPhase) si los implementas */
+    }
+  </main>
+</Layout>

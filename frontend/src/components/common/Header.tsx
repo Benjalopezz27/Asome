@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../common/Navbar"; 
+import Navbar from "./Navbar"; 
 import { Logo } from "../ui/logoHeader"; 
 import { AlignLeft, X } from 'lucide-react';
 import { type NavbarLink, type MenuItem } from "../../types";
@@ -17,7 +17,7 @@ const Header = ({ menuItems, ctaButton }: HeaderProps) => {
   }
 
   return (
-    <header className="flex items-center justify-between lg:justify-around px-5 lg:px-20 py-6 shadow-md bg-white relative z-50">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between lg:justify-around px-5 lg:px-20 py-6 shadow-md bg-white z-50">
       {/* Logo */}
       <a href="/" className="flex items-center z-50">
         <Logo />

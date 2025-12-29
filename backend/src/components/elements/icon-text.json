@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_elements_icon_texts",
+  "info": {
+    "displayName": "iconText"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
