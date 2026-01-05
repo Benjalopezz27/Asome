@@ -12,6 +12,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::service.service"
+    },
+    "badge": {
+      "type": "string"
     }
   },
   "config": {}

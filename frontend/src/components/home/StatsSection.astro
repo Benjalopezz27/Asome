@@ -1,8 +1,6 @@
 ---
 import RightArrowIcon from "../shared/icons/rightArrowIcon.astro";
 
-// src/components/blocks/StatsSection.astro
-
 interface Stat {
   id: number;
   number: number;
@@ -23,7 +21,7 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
 
 <section id="stats-section" class="py-20 bg-dark-blue text-white text-center">
   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
       {title}
     </h2>
     <p class="text-gray-300 max-w-2xl mx-auto mb-16 text-lg">
@@ -34,9 +32,8 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
       {
         stats.map((stat) => (
           <div class="bg-white dark-blue rounded-2xl p-8 shadow-lg transform hover:-translate-y-1 transition-transform duration-300">
-            <div class="font-extrabold text-5xl md:text-6xl mb-2 flex justify-center items-center primary-blue">
+            <div class="font-bold text-5xl md:text-6xl mb-2 flex justify-center items-center primary-blue">
               <span>{stat.suffix}</span>
-              {/* Agregamos una clase única para asegurar la selección */}
               <span class="stats-counter" data-target={stat.number}>
                 0
               </span>
@@ -62,20 +59,15 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
 </section>
 
 <script>
-  // Definimos la función de inicialización para poder llamarla varias veces si es necesario
   function initStatsAnimation() {
     const section = document.getElementById("stats-section");
     const counters = document.querySelectorAll(".stats-counter");
 
-    // Debug: Verifica en la consola si encuentra los elementos
     if (!section) {
-      // console.log("StatsSection: No se encontró la sección #stats-section");
       return;
     }
 
-    // console.log("StatsSection: Inicializando observador...");
-
-    let started = false; // Flag para evitar repeticiones
+    let started = false;
 
     const animateCounter = (counter: Element) => {
       const targetAttr = counter.getAttribute("data-target");
@@ -90,7 +82,6 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
       const updateCount = () => {
         current += increment;
         if (current < target) {
-          // Math.ceil asegura que números pequeños suban al menos de 1 en 1
           (counter as HTMLElement).innerText = Math.ceil(current).toString();
           requestAnimationFrame(updateCount);
         } else {
@@ -105,23 +96,19 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !started) {
-            // console.log("StatsSection: Sección visible, iniciando animación.");
             counters.forEach((counter) => animateCounter(counter));
             started = true;
-            observer.disconnect(); // Dejar de observar una vez animado
+            observer.disconnect();
           }
         });
       },
       { threshold: 0.2 }
-    ); // Se activa al ver el 20% del componente
+    );
 
     observer.observe(section);
   }
 
-  // EJECUCIÓN:
-  // 1. Ejecutar inmediatamente (para carga normal)
   initStatsAnimation();
 
-  // 2. Ejecutar en cada navegación (Soporte para Astro View Transitions)
   document.addEventListener("astro:page-load", initStatsAnimation);
 </script>

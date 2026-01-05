@@ -15,11 +15,10 @@ const { badge, title, services } = Astro.props;
 
 <section class="py-16 md:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Cabecera de la categoría */}
     <div class="flex flex-col items-center space-y-4 mb-16 text-center">
       <Badge title={badge} />
       <h2
-        class="text-3xl md:text-[40px] font-extrabold text-gray-900 max-w-xl mx-auto leading-tight"
+        class="text-3xl md:text-[40px] font-bold dark-gray max-w-xl mx-auto leading-tight"
       >
         {title}
       </h2>
@@ -28,7 +27,6 @@ const { badge, title, services } = Astro.props;
       </div>
     </div>
 
-    {/* Lista de Servicios */}
     <div class="space-y-24">
       {services?.map((service) => <ServiceCard service={service} />)}
     </div>

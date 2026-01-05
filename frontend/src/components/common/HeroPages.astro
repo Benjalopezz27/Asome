@@ -10,7 +10,6 @@ const {
 } = Astro.props;
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
-// Helper para obtener la URL
 const bgUrl = backgroundImage?.url
   ? `${STRAPI_URL}${backgroundImage.url}`
   : null;
@@ -37,11 +36,11 @@ const bgUrl = backgroundImage?.url
       buttonText && buttonUrl && (
         <a
           href={buttonUrl}
-          class="mt-8 inline-flex items-center justify-center px-6 py-3 bg-white primary-blue text-[18px] font-black rounded-lg hover:bg-gray-100 transition-colors"
+          class="mt-8 inline-flex items-center justify-center px-6 py-3 bg-white primary-blue text-[18px] font-bold rounded-lg hover:bg-gray-100 transition-colors"
         >
           {buttonIcon && (
             <span class="mr-2 flex items-center">
-              <CalendarDays size={20} className="stroke-3" />
+              <CalendarDays size={20} className="stroke-2" />
             </span>
           )}
           {buttonText}

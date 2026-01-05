@@ -1,0 +1,88 @@
+---
+import Advice from "@/components/common/Advice.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getHeroPages } from "@/lib/globalData";
+import { getAboutPageData } from "@/lib/aboutData";
+import { getHomePageData } from "@/lib/homeData";
+import Newsletter from "@/components/common/Newsletter.astro";
+import type { NewsletterBlock, TeamMember } from "@/types/index";
+import HeroPages from "@/components/common/HeroPages.astro";
+import TeamMemberCard from "@/components/about/aboutUs/memberCard.astro";
+import MissionVision from "@/components/about/aboutUs/MissionVision.astro";
+import FeatureGrid from "@/components/home/FeatureGrid.astro";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "es-AR" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+
+const { blocks: homeBlocks } = await getHomePageData(lang);
+
+const { blocks: aboutBlocks } = await getAboutPageData(lang);
+
+const globalHero = await getHeroPages(lang);
+const aboutHero = globalHero.find((hero) => hero.slug === "about");
+const heroProps = aboutHero
+  ? {
+      title: aboutHero.title,
+      description: aboutHero.description,
+    }
+  : null;
+
+const newsletterData = homeBlocks?.find(
+  (b) => b.__component === "blocks.newsletter"
+) as NewsletterBlock | undefined;
+---
+
+<Layout>
+  {heroProps && <HeroPages {...heroProps} />}
+
+  {
+    aboutBlocks?.map((block: any) => {
+      if (block.__component === "blocks.members-section") {
+        return (
+          <section class="pt-16 pb-5 md:pt-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
+                {block.members.map((member: TeamMember) => (
+                  <TeamMemberCard member={member} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+      if (block.__component === "blocks.mission-vision") {
+        return (
+          <MissionVision
+            mission={block.mission}
+            vision={block.vision}
+            backgroundImage={block.backgroundImage}
+          />
+        );
+      }
+      if (block.__component === "blocks.feature-grid") {
+        return (
+          <FeatureGrid
+            variant="about"
+            title={block.title}
+            features={block.features}
+            badge={block.badge}
+          />
+        );
+      }
+      return null;
+    })
+  }
+
+  <Advice />
+
+  {
+    newsletterData && (
+      <div class="relative z-10 -mt-24 md:mb-10">
+        <Newsletter {...newsletterData} />
+      </div>
+    )
+  }
+</Layout>

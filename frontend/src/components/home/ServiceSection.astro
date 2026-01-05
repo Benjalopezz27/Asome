@@ -7,17 +7,18 @@ import { ChevronDown } from "lucide-react";
 interface Props {
   title: string;
   services: Service[];
+  badge?: string;
 }
 
-const { title, services } = Astro.props;
+const { title, services, badge } = Astro.props;
 ---
 
 <section class="py-16 md:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col items-center space-y-4 mb-10 text-center">
-      <Badge title="NUESTROS SERVICIOS" />
+      <Badge title={badge} />
       <h2
-        class="text-3xl md:text-[40px] font-extrabold text-gray-900 max-w-3xl mx-auto leading-tight"
+        class="text-3xl md:text-[40px] font-bold dark-gray max-w-3xl mx-auto leading-tight"
       >
         {title}
       </h2>

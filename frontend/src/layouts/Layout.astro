@@ -1,9 +1,12 @@
 ---
 import "../styles/global.css";
 import Header from "@/components/common/Header";
-import { getNavbarData } from "../lib/data";
+import { getNavbarData } from "../lib/globalData";
 import Footer from "@/components/common/Footer.astro";
-const { menuItems, cta } = await getNavbarData();
+import { getLangFromUrl } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const { menuItems, cta } = await getNavbarData(lang);
 ---
 
 <!doctype html>
@@ -16,7 +19,8 @@ const { menuItems, cta } = await getNavbarData();
     <title>Astro Basics</title>
   </head>
   <body>
-    <Header client:load menuItems={menuItems} ctaButton={cta} />
+    <Header client:load menuItems={menuItems} ctaButton={cta} lang={lang} />
+
     <slot />
 
     <Footer />

@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getProjects } from "@/lib/projectData";
+import type { Project } from "@/types";
+import HeroPages from "@/components/common/HeroPages.astro";
+import { useTranslations } from "@/i18n/utils";
+import bgPhases from "@/assets/bgPhases.webp";
+export async function getStaticPaths() {
+  const languages = ["es-AR", "en"];
+  const paths = await Promise.all(
+    languages.map(async (lang) => {
+      const projects = await getProjects(lang);
+
+      return projects.map((project: Project) => ({
+        params: { lang, slug: project.slug },
+        props: { project },
+      }));
+    })
+  );
+
+  return paths.flat();
+}
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+const imageData = Array.isArray(project.imageDescription)
+  ? project.imageDescription[0]
+  : project.imageDescription;
+let imageUrl = "/placeholder.jpg";
+
+if (imageData?.url) {
+  if (imageData.url.startsWith("http")) {
+    imageUrl = imageData.url;
+  } else {
+    imageUrl = `${STRAPI_URL}${imageData.url}`;
+  }
+}
+---
+
+<Layout title={`${project.title}`}>
+  <main class="bg-white">
+    <HeroPages title={project.title} description={project.introduction} />
+
+    <section class="py-28 px-4 max-w-6xl mx-auto">
+      <div class="mx-auto flex flex-col lg:flex-row">
+        <div
+          set:html={project.description}
+          class="text-xl primary-gray font-normal lg:mr-40"
+        />
+        <div>
+          <img
+            src={imageUrl}
+            alt={project.imageDescription?.alternativeText}
+            class="lg:scale-170 object-cover rounded-3xl"
+          />
+        </div>
+      </div>
+      <div class="mt-20 flex justify-center bg-gray-200"></div>
+    </section>
+  </main>
+</Layout>

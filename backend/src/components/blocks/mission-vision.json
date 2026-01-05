@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_blocks_mission_visions",
+  "info": {
+    "displayName": "MissionVision"
+  },
+  "options": {},
+  "attributes": {
+    "mission": {
+      "type": "component",
+      "component": "elements.mission-item",
+      "repeatable": true
+    },
+    "vision": {
+      "type": "component",
+      "component": "elements.mission-item",
+      "repeatable": true
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

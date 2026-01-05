@@ -1,0 +1,27 @@
+---
+// src/components/shared/TagList.astro
+import type { Tag } from "@/types";
+import { iconMap } from "../../lib/constants";
+
+interface Props {
+  tags: Tag[];
+  className?: string;
+}
+
+const { tags, className = "" } = Astro.props;
+---
+
+<div class={`flex flex-wrap gap-3 ${className}`}>
+  {
+    tags?.map((tag) => {
+      const IconComponent = iconMap[tag.icon || "default"] || iconMap.default;
+
+      return (
+        <div class="inline-flex items-center bg-white rounded-md px-4 py-2 text-xl font-medium text-gray-700 border border-gray-100">
+          <IconComponent className="size-5 stroke-2 mr-2 primary-blue" />
+          {tag.name}
+        </div>
+      );
+    })
+  }
+</div>

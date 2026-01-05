@@ -1,0 +1,82 @@
+---
+import ContactHome from "@/components/home/ContactHome.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getHomePageData } from "@/lib/homeData";
+import FeatureGrid from "@/components/home/FeatureGrid.astro";
+import StatsSection from "@/components/home/StatsSection.astro";
+import ServiceSection from "@/components/home/ServiceSection.astro";
+import Hero from "@/components/home/Hero.astro";
+import Newsletter from "@/components/common/Newsletter.astro";
+import type {
+  FeatureGridBlock,
+  StatsSectionBlock,
+  ServiceSectionBlock,
+  LogoSliderBlock,
+  HeroBlock,
+  NewsletterBlock,
+} from "@/types/index";
+import LogoSlider from "@/components/home/LogoSlider.astro";
+import Advice from "@/components/common/Advice.astro";
+
+// 1. Define the static paths for English and Spanish
+export async function getStaticPaths() {
+  return [{ params: { lang: "es-AR" } }, { params: { lang: "en" } }];
+}
+
+// 2. Extract the language from the URL params
+const { lang } = Astro.params;
+
+// 3. Fetch data passing the current language
+const { blocks } = await getHomePageData(lang);
+
+const newsletterData = blocks?.find(
+  (b) => b.__component === "blocks.newsletter"
+) as NewsletterBlock | undefined;
+
+const contentBlocks = blocks?.filter(
+  (b) => b.__component !== "blocks.newsletter"
+);
+---
+
+<Layout>
+  {
+    contentBlocks?.map((block) => {
+      if (block.__component === "blocks.hero") {
+        return <Hero {...(block as HeroBlock)} />;
+      }
+      if (block.__component === "blocks.feature-grid") {
+        return <FeatureGrid {...(block as FeatureGridBlock)} />;
+      }
+      if (block.__component === "blocks.stats-section") {
+        return <StatsSection {...(block as StatsSectionBlock)} />;
+      }
+      if (block.__component === "blocks.service-section") {
+        return <ServiceSection {...(block as ServiceSectionBlock)} />;
+      }
+      if (block.__component === "blocks.logo-slider") {
+        return <LogoSlider {...(block as LogoSliderBlock)} />;
+      }
+
+      return process.env.NODE_ENV === "development" ? (
+        <div class="p-4 bg-red-100 text-red-700 border border-red-400 m-4 rounded">
+          Bloque desconocido: {block["__component"]}
+        </div>
+      ) : null;
+    })
+  }
+
+  {
+    /* Note: ContactHome and Advice might need internal translation logic later */
+  }
+  <ContactHome />
+
+  <Advice />
+
+  {
+    newsletterData && (
+      <div class="relative z-10 -mt-24 md:mb-10">
+        <Newsletter {...newsletterData} />
+      </div>
+    )
+  }
+</Layout>

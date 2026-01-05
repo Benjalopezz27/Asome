@@ -1,0 +1,32 @@
+import {
+  CloudCheck,
+  Bot,
+  Smartphone,
+  ShoppingBag,
+  Image,
+  ChartColumnIncreasing,
+  ChartNoAxesCombined,
+  ChartPie,
+  Brush,
+  ScreenShare,
+  Database,
+  Globe,
+  Boxes,
+} from "lucide-react";
+
+export const iconMap: Record<string, any> = {
+  cloud: CloudCheck,
+  bot: Bot,
+  cube: Boxes,
+  chartPie: ChartPie,
+  screen: ScreenShare,
+  seo: ChartNoAxesCombined,
+  stadistics: ChartColumnIncreasing,
+  globe: Globe,
+  smartphone: Smartphone,
+  ecommerce: ShoppingBag,
+  brush: Brush,
+  image: Image,
+  database: Database,
+  default: Bot,
+};

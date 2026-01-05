@@ -1,0 +1,101 @@
+---
+import RightArrowIcon from "../shared/icons/rightArrowIcon.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  placeholder?: string;
+  buttonText?: string;
+}
+
+const {
+  title,
+  description,
+  placeholder = "Email",
+  buttonText = "Suscribirse",
+} = Astro.props;
+---
+
+<section class="w-full md:py-8 md:px-4 md:-my-50 bg-gray-100 md:bg-transparent">
+  <div
+    class="max-w-6xl mx-auto bg-gray-100 rounded-4xl py-8 px-6 flex flex-col md:flex-row items-center justify-center md:shadow-sm"
+  >
+    <div class="w-full md:w-1/2 space-y-2">
+      <h2 class="text-3xl md:text-4xl font-bold dark-gray tracking-tight">
+        {title}
+      </h2>
+      <p class="text-xl md:max-w-lg">
+        {description}
+      </p>
+    </div>
+
+    <div class="w-full md:w-1/2">
+      <form
+        id="newsletter-form"
+        class="flex flex-col sm:flex-row w-full gap-4 max-w-lg ml-auto pt-4"
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder={placeholder}
+          class="w-full md:w-1/2 h-16 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent dark-gray placeholder-gray-500 text-2xl bg-white font-medium"
+        />
+
+        <button
+          type="submit"
+          class="h-16 px-7 rounded-xl bg-dark-blue text-white font-bold text-2xl items-center justify-center gap-2 transition-colors duration-300 whitespace-nowrap inline-flex cursor-pointer"
+        >
+          {buttonText}
+          <RightArrowIcon class="stroke-3" />
+        </button>
+      </form>
+
+      <p
+        id="form-success"
+        class="hidden mt-3 text-green-600 font-medium text-sm"
+      >
+        ¡Gracias! Te has suscrito correctamente.
+      </p>
+      <p id="form-error" class="hidden mt-3 text-red-600 font-medium text-sm">
+        Hubo un error. Inténtalo de nuevo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const successMsg = document.getElementById("form-success");
+  const errorMsg = document.getElementById("form-error");
+  const STRAPI_URL =
+    import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      successMsg?.classList.add("hidden");
+      errorMsg?.classList.add("hidden");
+
+      const formData = new FormData(form);
+      const email = formData.get("email");
+
+      try {
+        const response = await fetch(`${STRAPI_URL}/api/leads`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: { email } }),
+        });
+
+        if (response.ok) {
+          form.reset();
+          successMsg?.classList.remove("hidden");
+        } else {
+          errorMsg?.classList.remove("hidden");
+        }
+      } catch (error) {
+        errorMsg?.classList.remove("hidden");
+      }
+    });
+  }
+</script>
