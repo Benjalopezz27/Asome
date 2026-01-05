@@ -30,13 +30,22 @@
       "enum": [
         "software",
         "design",
-        "marketing"
+        "marketing",
+        "none"
       ]
     },
     "tags": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::tag.tag"
+    },
+    "imagePosition": {
+      "type": "enumeration",
+      "default": "right",
+      "enum": [
+        "right",
+        "left"
+      ]
     }
   }
 }

@@ -15,3 +15,156 @@ export interface NavbarDropdown {
 
 export type MenuItem = NavbarLink | NavbarDropdown;
 
+export interface FeatureCard {
+  id: number;
+  title: string;
+  description: string;
+  // No necesitamos __component aquí porque es hijo directo de un repetible conocido
+}
+
+export interface FeatureGridBlock {
+  id: number;
+  __component: 'blocks.feature-grid';
+  badge?: string;
+  title: string;
+  features: FeatureCard[];
+}
+
+export interface StatCard {
+  id: number;
+  number: number;
+  suffix?: string;
+  label: string;
+}
+
+export interface StatsSectionBlock {
+  id: number;
+  __component: 'blocks.stats-section'; // Asegúrate que este sea el UID en Strapi
+  title: string;
+  description: string;
+  stats: StatCard[];
+  buttonText?: string;
+  buttonUrl?: string;
+}
+export interface Tag {
+  id: number;
+  name: string;
+  icon: string;
+}
+
+export interface ServiceSectionBlock {
+  id: number;
+  __component: 'blocks.service-section';
+  title: string;
+  badge?: string;
+  services: Service[];
+}
+
+// Unimos todos los bloques posibles en un tipo (por ahora solo tienes el grid y el hero)
+// Si tienes un Hero, añádelo aquí: | HeroBlock
+export type AnyBlock = FeatureGridBlock | StatsSectionBlock | ServiceSectionBlock | LogoSliderBlock | HeroBlock | NewsletterBlock; 
+
+export interface HomePageData {
+  metaTitle: string
+  blocks: AnyBlock[]
+}
+export interface LogoItem {
+  id: number;
+  name: string;
+  image: {
+    url: string;
+  };
+}
+
+export interface LogoSliderBlock {
+  id: number;
+  __component: 'blocks.logo-slider';
+  title: string;
+  logos: LogoItem[];
+}
+export interface HeroBlock {
+  id: number;
+  __component: 'blocks.hero';
+  titleImage: any; // Puedes ser más específico si tienes una interfaz para Media
+  subtitle?: string;
+  backgroundImage?: any;
+  buttonText?: string;
+  buttonLink?: string;
+}
+export interface NewsletterBlock {
+  id: number;
+  __component: 'blocks.newsletter';
+  title: string;
+  description: string;
+  placeholder?: string;
+  buttonText?: string;
+}
+
+export interface Service {
+  id: number;
+  title: string;
+  slug: string;
+  category: 'software' | 'design' | 'marketing'; // O string simple
+  imagePosition: 'left' | 'right';
+  coverImage: {
+    url: string;
+  };
+  tags: Tag[];
+}
+
+export interface HeroPageData {
+  id: number;
+  title: string;
+  description: string;
+  buttonText?: string;
+  buttonUrl?: string;
+  tags?: Tag[];
+  backgroundImage?: {
+    url: string;
+  };
+  buttonIcon?: string;
+}
+
+export interface GlobalData {
+  heroPages: HeroPageData[];
+}
+export interface IconTextItem {
+  id: number;
+  text: string;
+  icon: string; // Si es un string (nombre de ícono) o un objeto Media si subes SVGs
+}
+
+// Nivel 2: La fase del proyecto (Componente ProjectPhase)
+export interface ProjectPhase {
+  id: number;
+  PhaseName: string; // Tal cual como lo nombraste
+  description: string;
+  // IMPORTANTE: Revisa en Strapi cómo se llama este campo repetible dentro de la fase
+  // Lo llamaré 'items' por defecto, pero podría ser 'iconTexts'
+  items: IconTextItem[]; 
+}
+
+// Nivel 1: El Proyecto completo
+export interface Project {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  introduction: string;
+  url?: string;
+  buttonText?: string;
+  buttonIcon?: string;
+  image: {
+    url: string;
+    alternativeText?: string;
+  };
+  tags?: {
+    id: number;
+    name: string;
+    icon: string;
+    // otros campos de tags
+  }[];
+  // El componente repetible de fases
+  phases: ProjectPhase[]; 
+  imagePosition: 'left' | 'right';
+}

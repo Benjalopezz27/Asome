@@ -1,0 +1,52 @@
+---
+import { CalendarDays } from "lucide-react";
+const {
+  title,
+  description,
+  backgroundImage,
+  buttonText,
+  buttonUrl,
+  buttonIcon,
+} = Astro.props;
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+// Helper para obtener la URL
+const bgUrl = backgroundImage?.url
+  ? `${STRAPI_URL}${backgroundImage.url}`
+  : null;
+---
+
+<section class="relative bg-dark-blue text-white py-40 px-4 overflow-hidden">
+  {
+    bgUrl && (
+      <div class="absolute top-10 -right-36 h-full w-full md:w-1/2 pointer-events-none z-0">
+        <img
+          src={bgUrl}
+          alt=""
+          class="w-full h-full object-cover object-right opacity-10 "
+        />
+      </div>
+    )
+  }
+  <div class="max-w-7xl mx-auto items-center px-18">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-6">{title}</h1>
+    <p class="text-lg md:text-xl max-w-3xl">
+      {description}
+    </p>
+    {
+      buttonText && buttonUrl && (
+        <a
+          href={buttonUrl}
+          class="mt-8 inline-flex items-center justify-center px-6 py-3 bg-white primary-blue text-[18px] font-black rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          {buttonIcon && (
+            <span class="mr-2 flex items-center">
+              <CalendarDays size={20} className="stroke-3" />
+            </span>
+          )}
+          {buttonText}
+        </a>
+      )
+    }
+  </div>
+</section>

@@ -1,4 +1,5 @@
 ---
+import Advice from "@/components/common/Advice.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getHeroPages, getHomePageData } from "@/lib/data";
 import Newsletter from "@/components/blocks/Newsletter.astro";
@@ -8,13 +9,14 @@ import HeroPages from "@/components/common/HeroPages.astro";
 // 1. EXTRAER EL NEWSLETTER: Buscamos si existe el bloque en la data
 const { blocks } = await getHomePageData();
 const globalHero = await getHeroPages();
-const blogHero = globalHero[3];
-const heroProps = blogHero
+const workHero = globalHero[2];
+const heroProps = workHero
   ? {
-      title: blogHero.title,
-      description: blogHero.description,
+      title: workHero.title,
+      description: workHero.description,
     }
   : null;
+
 const newsletterData = blocks?.find(
   (b) => b.__component === "blocks.newsletter"
 ) as NewsletterBlock | undefined;
@@ -22,6 +24,7 @@ const newsletterData = blocks?.find(
 
 <Layout>
   {heroProps && <HeroPages {...heroProps} />}
+  <Advice />
   {
     newsletterData && (
       <div class="relative z-10 -mt-24 mb-10">

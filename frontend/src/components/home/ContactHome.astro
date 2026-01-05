@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import contactHome from "../../assets/contactHome.webp";
+import RightArrowIcon from "../shared/icons/rightArrowIcon.astro";
+import Badge from "../shared/badge.astro";
+---
+
+<section class="w-full bg-[#F1F1F1] flex justify-center px-4 py-12 lg:py-20">
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center max-w-7xl w-full"
+  >
+    <div
+      class="bg-white w-full lg:w-140 p-8 lg:p-10
+                    rounded-2xl lg:rounded-bl-4xl lg:rounded-tl-4xl lg:rounded-br-none lg:rounded-tr-none
+                    flex flex-col gap-6 lg:gap-8 text-center lg:text-left"
+    >
+      <Badge title="CONTACTO" />
+
+      <div>
+        <h3 class="text-2xl sm:text-3xl lg:text-[40px] font-bold">
+          ¿Trabajemos juntos?
+        </h3>
+        <h3 class="text-2xl sm:text-3xl lg:text-[40px] font-bold">
+          Contáctanos.
+        </h3>
+      </div>
+
+      <button
+        class="bg-[#1C39BB] text-white inline-flex items-center
+                         justify-center lg:justify-start gap-2 font-bold
+                         py-3 px-4 rounded-xl w-full sm:w-fit mx-auto lg:mx-0"
+      >
+        Agendar una llamada
+        <RightArrowIcon />
+      </button>
+    </div>
+    <div class="bg-white rounded-4xl mt-8 lg:mt-0">
+      <Image
+        src={contactHome}
+        alt="contacto home image"
+        class="lg:h-107.5 w-133 h-64 rounded-4xl p-1.5 object-cover"
+      />
+    </div>
+  </div>
+</section>

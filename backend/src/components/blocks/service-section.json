@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_service_sections",
+  "info": {
+    "displayName": "ServiceSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    }
+  },
+  "config": {}
+}

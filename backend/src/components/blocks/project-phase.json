@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_project_phases",
+  "info": {
+    "displayName": "projectPhase"
+  },
+  "options": {},
+  "attributes": {
+    "PhaseName": {
+      "type": "string"
+    },
+    "IconText": {
+      "type": "component",
+      "component": "elements.icon-text",
+      "repeatable": true
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

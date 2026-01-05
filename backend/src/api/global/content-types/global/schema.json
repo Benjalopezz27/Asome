@@ -22,6 +22,11 @@
         "elements.navbar-links",
         "elements.dropdown"
       ]
+    },
+    "HeroPages": {
+      "type": "component",
+      "component": "blocks.hero-pages",
+      "repeatable": true
     }
   }
 }
