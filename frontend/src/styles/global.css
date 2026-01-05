@@ -5,33 +5,49 @@
   padding-inline: 1rem;
 }
 
+
 @font-face {
-    font-family: "Maax Regular";
-    src: url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.eot");
-    src: url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/5f2c788cd3f888e155befe56d6244805.svg#Maax Regular")format("svg");
+  font-family: 'Maax';
+  src: url('/fonts/MaaxTrial-Regular.otf') format('opentype'); /* 👈 Ojo aquí */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-    font-family: "Maax Bold";
-    src: url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.eot");
-    src: url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/30c7b0ba24b3056fd3b4d95abf785da0.svg#Maax Bold")format("svg");
+  font-family: 'Maax';
+  src: url('/fonts/MaaxTrial-Medium.otf') format('opentype'); /* 👈 Ojo aquí */
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
+
+
+
+@font-face {
+  font-family: 'Maax';
+  src: url('/fonts/MaaxTrial-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Maax';
+  src: url('/fonts/MaaxTrial-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Maax';
+  src: url('/fonts/MaaxTrial-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
-  font-family: "Maax Regular";
-}
-h1, h2, h3, h4, h5, h6{
-  font-family: "Maax Bold";
-}
-span 
-{
-  font-family: "Maax Bold";
+    font-family: 'Maax', sans-serif;
 }
 
 /* --- PRIMARY BLUE --- */
@@ -72,4 +88,11 @@ span
 /* --- WHITE SMOKE --- */
 .white-smoke {
     color: #F5F5F5;
+}
+
+.primary-gray {
+  color: #484848
+}
+.dark-gray{
+  color: var(--color-gray-900)
 }

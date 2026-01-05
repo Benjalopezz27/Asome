@@ -1,16 +1,19 @@
 ---
 import { type Project } from "@/types";
 import { ArrowRight, Monitor } from "lucide-react";
-
-// 1. Definimos la interfaz de los datos que recibe la tarjeta
-// Ajusta esto según tu interfaz real de Project en data.ts
-
+import { getLangFromUrl, getLocalizedPath } from "@/i18n/utils";
+import Tag from "@/components/shared/tag.astro";
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 interface Props {
   project: Project;
 }
 
 const { project } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+
+const projectUrl = getLocalizedPath(`/projects/${project.slug}`, lang);
+
 const imageData = Array.isArray(project.image)
   ? project.image[0]
   : project.image;
@@ -24,13 +27,10 @@ if (imageData?.url) {
   }
 }
 
-const isImageRight = project.imagePosition === "left";
+const isImageRight = project.imagePosition === "right";
 const borderRadiusClass = isImageRight
   ? "lg:rounded-l-3xl lg:rounded-r-none "
   : "lg:rounded-r-3xl lg:rounded-l-none";
-const iconMap: Record<string, any> = {
-  default: Monitor,
-};
 ---
 
 <div
@@ -38,37 +38,23 @@ const iconMap: Record<string, any> = {
 >
   <div class="w-full lg:w-1/2 space-y-10">
     <div
-      class={`bg-[#F3F5FB] rounded-3xl flex flex-col gap-6 lg:rounded-none p-6 md:pl-14 md:py-14 duration-300 ${borderRadiusClass}}  ${isImageRight ? "" : "mr-50 -ml-55"} `}
+      class={`bg-[#F3F5FB] rounded-3xl flex flex-col gap-6 lg:rounded-none p-6 md:pl-14 md:py-14 duration-300 ${borderRadiusClass}}  ${isImageRight ? "" : "lg:mr-45 lg:-ml-48 pl-10"} `}
     >
-      <a href={`/projects/${project.slug}`} class="block group">
-        <h3
-          class="text-2xl md:text-[32px] font-bold text-gray-900 transition-colors group-hover:text-blue-700"
-        >
+      <a href={projectUrl} class="block group">
+        <h3 class="text-2xl md:text-[32px] font-bold dark-gray">
           {project.title}
         </h3>
       </a>
 
       {/* Tags */}
       <div class="flex flex-wrap gap-3">
-        {
-          project.tags?.map((tag) => {
-            const IconComponent =
-              iconMap[tag.icon || "default"] || iconMap.default;
-
-            return (
-              <div class="inline-flex items-center bg-white rounded-md px-4 py-2 text-xl font-bold text-gray-700  border border-gray-100">
-                <IconComponent className="size-5 stroke-2 mr-2 text-blue-600" />
-                {tag.name}
-              </div>
-            );
-          })
-        }
+        <Tag tags={project.tags || []} />
       </div>
 
       <div>
         <a
-          href={`/projects/${project.slug}`}
-          class="inline-flex items-center bg-[#1C39BB] hover:bg-blue-800 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 group"
+          href={projectUrl}
+          class="inline-flex items-center bg-primary-blue text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 group"
         >
           {project.buttonText}
           <ArrowRight
@@ -83,7 +69,7 @@ const iconMap: Record<string, any> = {
       <img
         src={imageUrl}
         alt={project.image?.alternativeText || project.title}
-        class="w-2/3 object-center drop-shadow-xl transform scale-166 hover:scale-170 transition-transform duration-500"
+        class="w-2/3 object-center drop-shadow-xl transform scale-165 hover:scale-170 transition-transform duration-500"
       />
     </div>
   </div>

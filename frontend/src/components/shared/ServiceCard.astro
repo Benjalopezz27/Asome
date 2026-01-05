@@ -1,20 +1,6 @@
 ---
 import type { Service } from "@/types";
-import {
-  CloudCheck,
-  Bot,
-  Smartphone,
-  ShoppingBag,
-  Image,
-  ChartColumnIncreasing,
-  ChartNoAxesCombined,
-  ChartPie,
-  Brush,
-  ScreenShare,
-  Database,
-  Globe,
-  Boxes,
-} from "lucide-react";
+import Tag from "./tag.astro";
 interface Props {
   service: Service;
 }
@@ -23,22 +9,7 @@ const { service } = Astro.props;
 
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 const isImageRight = service.imagePosition === "right";
-const iconMap: Record<string, any> = {
-  cloud: CloudCheck,
-  bot: Bot,
-  cube: Boxes,
-  chartPie: ChartPie,
-  screen: ScreenShare,
-  seo: ChartNoAxesCombined,
-  stadistics: ChartColumnIncreasing,
-  globe: Globe,
-  smartphone: Smartphone,
-  ecommerce: ShoppingBag,
-  brush: Brush,
-  image: Image,
-  database: Database,
-  default: Bot,
-};
+
 const borderRadiusClass = isImageRight
   ? "lg:rounded-l-3xl lg:rounded-r-none"
   : "lg:rounded-r-3xl lg:rounded-l-none";
@@ -49,36 +20,21 @@ const borderRadiusClass = isImageRight
 >
   <div class="w-full lg:w-1/2 space-y-8">
     <div
-      class={`bg-[#F3F5FB] rounded-t-3xl lg:rounded-t-none p-8 md:px-14 md:py-14 duration-300 ${borderRadiusClass}}`}
+      class={`bg-[#F3F5FB] rounded-t-3xl lg:rounded-t-none p-8 md:px-14 md:py-14 duration-300 ${borderRadiusClass}`}
     >
       <a href={`/servicios/${service.slug}`} class="block group">
-        <h3
-          class="text-2xl md:text-[32px] font-bold text-gray-900 mb-6 transition-colors group-hover:text-blue-700"
-        >
+        <h3 class="text-2xl md:text-[32px] font-bold dark-gray mb-6">
           {service.title}
         </h3>
       </a>
 
       {/* Tags */}
       <div class="flex flex-wrap gap-3">
-        {
-          service.tags?.map((tag) => {
-            const IconComponent =
-              iconMap[tag.icon || "default"] || iconMap.default;
-
-            return (
-              <div class="inline-flex items-center bg-white rounded-md px-4 py-2 text-xl font-bold text-gray-700  border border-gray-100">
-                <IconComponent className="size-5 stroke-2 mr-2 text-blue-600" />
-                {tag.name}
-              </div>
-            );
-          })
-        }
+        <Tag tags={service.tags || []} />
       </div>
     </div>
   </div>
 
-  {/* Columna de Imagen */}
   <div class="w-full lg:w-[45%]">
     <a
       href={`/servicios/${service.slug}`}

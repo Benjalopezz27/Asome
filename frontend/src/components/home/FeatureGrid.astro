@@ -1,49 +1,68 @@
 ---
 import { ChevronDown } from "lucide-react";
 import Badge from "../shared/badge.astro";
-
-// src/components/blocks/FeatureGrid.astro
-
-interface Feature {
-  id: number;
-  title: string;
-  description: string;
-}
+import type { FeatureCard } from "@/types";
 
 interface Props {
   title: string;
-  features: Feature[];
+  features: FeatureCard[];
+  badge?: string;
+  variant?: "default" | "about";
 }
 
-const { title, features } = Astro.props;
+const { title, features, badge, variant = "default" } = Astro.props;
+
+const styles = {
+  default: {
+    title: "text-[#484848]",
+    description: "text-[#484848]",
+  },
+  about: {
+    title: "dark-blue",
+    description: "secondary-blue",
+  },
+};
+
+const currentStyle = styles[variant] || styles.default;
 ---
 
-<section class="py-16 md:pt-24 bg-slate-50">
+<section class={`py-16 md:pt-24`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 text-center">
-    {/* Header de la sección */}
     <div class="flex flex-col items-center space-y-4 mb-16">
-      <Badge title="¿POR QUÉ ELEGIRNOS?" />
+      <Badge title={badge} />
       <h2
-        class="text-3xl md:text-[40px] font-extrabold text-gray-900 max-w-3xl mx-auto leading-tight"
+        class={`text-3xl md:text-[40px] font-bold max-w-3xl mx-auto leading-tight mt-5`}
       >
         {title}
       </h2>
 
-      {/* Icono de flecha hacia abajo */}
       <div class="mt-4 secondary-blue animate-bounce">
         <ChevronDown className="size-8 stroke-3" />
       </div>
     </div>
 
-    {/* Cuadrícula de Tarjetas */}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flex flex-wrap justify-center gap-6">
       {
         features.map((feature) => (
-          <div class="bg-[#F5F7FC] rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center">
-            <h3 class="text-3xl font-bold text-[#484848] mb-4">
+          <div
+            class={`
+          bg-[#F5F7FC] rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center
+          w-full                       
+          md:w-[calc(50%-12px)]        
+          lg:w-[calc(33.33%-16px)]     
+        `}
+          >
+            <h3
+              class={`${currentStyle.title} text-3xl font-bold primary-gray mb-4`}
+            >
               {feature.title}
             </h3>
-            <p class="text-[#484848] text-lg font-normal leading-relaxed">
+            <p
+              class={
+                currentStyle.description +
+                " text-lg font-normal leading-relaxed"
+              }
+            >
               {feature.description}
             </p>
           </div>

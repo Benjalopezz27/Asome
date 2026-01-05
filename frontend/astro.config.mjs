@@ -9,4 +9,11 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   integrations: [react()],
+  i18n: {
+    defaultLocale: 'es-AR',
+    locales: ['es-AR', 'en'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
 });

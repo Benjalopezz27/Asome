@@ -3,7 +3,16 @@ import LogoFooter from "../ui/logoFooter.astro";
 import FacebookIcon from "../shared/icons/facebookIcon.astro";
 import InstagramIcon from "../shared/icons/instagramIcon.astro";
 import LinkedinIcon from "../shared/icons/linkedinIcon.astro";
-import WhatsappIcon from "../shared/icons/whatsappIcon.astro";
+import WhatsappIcon from "../shared/icons/whatsapp.astro";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLocalizedPath,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="bg-[#1E1E1E] relative text-white pb-16 pt-36">
@@ -15,50 +24,66 @@ import WhatsappIcon from "../shared/icons/whatsappIcon.astro";
                     md:grid-cols-2 md:text-left md:items-start md:justify-items-center
                     lg:grid-cols-4 px-10 pt-6"
     >
-      {/* Logo */}
       <div class="flex justify-center md:justify-start">
         <LogoFooter />
       </div>
 
-      {/* Contacto */}
       <div>
-        <h3 class="font-medium text-xl mb-4">Contacto</h3>
+        <h3 class="font-medium text-xl mb-4">{t("footer.contact")}</h3>
         <a href="mailto:hola@asomelab.com" class="text-muted-foreground mb-3">
-          hola<span class="text-[#1C39BB]">@</span>asomelab.com
+          hola<span class="primary-blue">@</span>asomelab.com
         </a>
-        <div class="flex justify-center md:justify-start gap-3">
-          <a href="">
-            <WhatsappIcon class="size-6" />
+        <div class="flex justify-center md:justify-start gap-1 mt-3">
+          <a href="#" target="_blank" aria-label="Whatsapp">
+            <WhatsappIcon class="size-8" />
           </a>
-          <a href="">
-            <InstagramIcon class="size-6" />
+          <a href="#" target="_blank" aria-label="Instagram">
+            <InstagramIcon class="size-8" />
           </a>
-          <a href="">
-            <LinkedinIcon class="size-6" />
+          <a href="#" target="_blank" aria-label="LinkedIn">
+            <LinkedinIcon class="size-8" />
           </a>
-          <a href="">
-            <FacebookIcon class="size-6" />
+          <a href="#" target="_blank" aria-label="Facebook">
+            <FacebookIcon class="size-8" />
           </a>
         </div>
       </div>
 
-      {/* Inicio */}
       <div>
-        <h3 class="font-medium text-xl mb-4">Inicio</h3>
+        <h3 class="font-medium text-xl mb-4">{t("footer.home")}</h3>
         <ul class="space-y-2">
-          <li><a href="">Trabajá con nosotros</a></li>
-          <li><a href="">Sobre nosotros</a></li>
-          <li><a href="">Proyectos</a></li>
-          <li><a href="">Blog</a></li>
+          <li>
+            <a href={getLocalizedPath("/careers", lang)}
+              >{t("footer.workWithUs")}</a
+            >
+          </li>
+          <li>
+            <a href={getLocalizedPath("/about", lang)}>{t("footer.about")}</a>
+          </li>
+          <li>
+            <a href={getLocalizedPath("/projects", lang)}
+              >{t("footer.projects")}</a
+            >
+          </li>
+          <li>
+            <a href={getLocalizedPath("/blog", lang)}>{t("footer.blog")}</a>
+          </li>
         </ul>
       </div>
 
-      {/* Servicios */}
       <div>
-        <h3 class="font-medium text-xl mb-4">Servicios</h3>
+        <h3 class="font-medium text-xl mb-4">{t("footer.services")}</h3>
         <ul class="space-y-2">
-          <li><a href="">Etapa de construcción</a></li>
-          <li><a href="">Etapa de crecimiento</a></li>
+          <li>
+            <a href={getLocalizedPath("/services/construction", lang)}
+              >{t("footer.buildStage")}</a
+            >
+          </li>
+          <li>
+            <a href={getLocalizedPath("/services/growth", lang)}
+              >{t("footer.growthStage")}</a
+            >
+          </li>
         </ul>
       </div>
     </div>

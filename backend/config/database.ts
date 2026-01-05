@@ -1,31 +1,38 @@
 import path from 'path';
+import { parse } from 'pg-connection-string';
 
 export default ({ env }) => {
-  // Leemos el cliente desde el .env (será 'postgres' en Docker)
   const client = env('DATABASE_CLIENT', 'sqlite');
 
   const connections = {
-    postgres: {
+    sqlite: {
       connection: {
-        host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
-        password: env('DATABASE_PASSWORD', 'strapi'),
-        ssl: env.bool('DATABASE_SSL', false),
+        filename: path.join(__dirname, '..', '..', '.tmp/data.db'),
+      },
+      useNullAsDefault: true,
+    },
+  };
+
+  if (client === 'postgres') {
+    const databaseUrl = env('DATABASE_URL');
+    
+    const config = (databaseUrl ? parse(databaseUrl) : {}) as any;
+
+    connections['postgres'] = {
+      connection: {
+        host: config.host || env('DATABASE_HOST', '127.0.0.1'),
+        port: config.port || env.int('DATABASE_PORT', 5432),
+        database: config.database || env('DATABASE_NAME', 'strapi'),
+        user: config.user || env('DATABASE_USERNAME', 'strapi'),
+        password: config.password || env('DATABASE_PASSWORD', 'strapi'),
+        ssl: env.bool('DATABASE_SSL', true) ? { rejectUnauthorized: false } : false,
       },
       pool: {
         min: env.int('DATABASE_POOL_MIN', 2),
         max: env.int('DATABASE_POOL_MAX', 10),
       },
-    },
-    sqlite: {
-      connection: {
-        filename: path.join(__dirname, '..', '..', env('DATABASE_FILENAME', '.tmp/data.db')),
-      },
-      useNullAsDefault: true,
-    },
-  };
+    };
+  }
 
   return {
     connection: {

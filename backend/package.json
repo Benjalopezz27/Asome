@@ -12,7 +12,12 @@
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "db:start": "docker-compose up -d",
+    "db:stop": "docker-compose down",
+    "db:restart": "docker-compose restart",
+    "db:logs": "docker-compose logs -f",
+    "db:reset": "docker-compose down -v && docker-compose up -d"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.32.0",
@@ -20,6 +25,7 @@
     "@strapi/strapi": "5.32.0",
     "better-sqlite3": "12.4.1",
     "pg": "^8.16.3",
+    "pg-connection-string": "^2.9.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -33,7 +39,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=20.0.0 <=24.x.x",
+    "node": "20.x",
     "npm": ">=6.0.0"
   },
   "strapi": {

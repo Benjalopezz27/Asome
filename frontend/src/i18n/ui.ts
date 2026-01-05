@@ -1,0 +1,58 @@
+// src/i18n/ui.ts
+
+export const languages = {
+  'es-AR': 'Español',
+  en: 'English',
+};
+
+export const defaultLang = 'es-AR';
+export const ui = {
+  'es-AR': {
+    'badge.contact': 'CONTACTO',
+    'contactHome.title1': '¿Trabajemos juntos?',
+    'contactHome.title2': 'Contáctanos.',
+    'btn.scheduleCall': 'Agendar una llamada',
+    'alt.contactHome': 'imagen de contacto inicio',
+    'nav.home': 'Inicio',
+    'nav.projects': 'Proyectos',
+    'nav.contact': 'Contacto',
+    'btn.viewProject': 'Ver proyecto',
+    'btn.contactUs': 'Contáctanos',
+    'footer.rights': 'Todos los derechos reservados',
+    'advice.title': 'Diseñemos el futuro digital de tu marca.',
+    'advice.btn': 'Agendar una asesoría gratuita',
+    'footer.contact': 'Contacto',
+    'footer.home': 'Inicio',
+    'footer.workWithUs': 'Trabajá con nosotros',
+    'footer.about': 'Sobre nosotros',
+    'footer.projects': 'Proyectos',
+    'footer.blog': 'Blog',
+    'footer.services': 'Servicios',
+    'footer.buildStage': 'Etapa de construcción',
+    'footer.growthStage': 'Etapa de crecimiento',
+  },
+  en: {
+    'badge.contact': 'CONTACT',
+    'contactHome.title1': 'Let\'s work together?',
+    'contactHome.title2': 'Contact us.',
+    'btn.scheduleCall': 'Schedule a call',
+    'alt.contactHome': 'contact home image',
+    'nav.home': 'Home',
+    'nav.projects': 'Projects',
+    'nav.contact': 'Contact',
+    'btn.viewProject': 'View project',
+    'btn.contactUs': 'Contact Us',
+    'footer.rights': 'All rights reserved',
+    'advice.title': 'Let\'s design the digital future of your brand.',
+    'advice.btn': 'Schedule a free consultation',
+    'footer.contact': 'Contact',
+    'footer.home': 'Home',
+    'footer.workWithUs': 'Work with us',
+    'footer.about': 'About us',
+    'footer.projects': 'Projects',
+    'footer.blog': 'Blog',
+    'footer.services': 'Services',
+    'footer.buildStage': 'Build stage',
+    'footer.growthStage': 'Growth stage',
+  },
+} as const;

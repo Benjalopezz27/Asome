@@ -13,14 +13,17 @@ interface Image {
 }
 
 interface Props {
-  titleImage: Image;
+  titleImage: Image["data"]["attributes"];
   subtitle?: string;
-  backgroundImage?: Image;
+  backgroundImage?: {
+    url: string;
+  };
   buttonText?: string;
   buttonUrl?: string;
+  badge?: string;
 }
 
-const { titleImage, subtitle, backgroundImage, buttonText, buttonUrl } =
+const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
   Astro.props;
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
@@ -42,7 +45,6 @@ const altText = titleImage?.alternativeText || "Frase principal";
           alt="Fondo"
           class="w-full h-full object-cover"
         />
-        {/* Capa oscura para mejorar la legibilidad */}
         <div class="absolute inset-0 opacity-50" />
       </div>
     )
@@ -52,7 +54,7 @@ const altText = titleImage?.alternativeText || "Frase principal";
     class="relative z-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-16"
   >
     <Badge
-      title="Software, diseño y marketing basado para escalar tu empresa"
+      title={badge}
       class="text-white border border-white bg-white/20 rounded-md px-2 py-1 text-sm w-1/2"
     />
 

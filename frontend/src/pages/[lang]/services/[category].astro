@@ -1,0 +1,78 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroPages from "@/components/common/HeroPages.astro";
+import ServiceList from "@/components/services/ServiceList.astro";
+import { getHeroPages } from "@/lib/globalData";
+import { getNewsletterData } from "@/lib/homeData";
+import { getServicesByCategory, getCategories } from "@/lib/servicesData";
+import Advice from "@/components/common/Advice.astro";
+import Newsletter from "@/components/common/Newsletter.astro";
+import type { CategoryData } from "@/types";
+
+// 1. Generate paths for all combinations: Language + Category
+export async function getStaticPaths() {
+  const languages = ["es-AR", "en"];
+  const paths: {
+    params: { lang: string; category: string };
+    props: { categoryData: CategoryData };
+  }[] = [];
+
+  for (const lang of languages) {
+    // Fetch categories specifically for this language
+    const categories = await getCategories(lang);
+
+    categories.forEach((cat) => {
+      paths.push({
+        params: { lang: lang, category: cat.slug },
+        props: { categoryData: cat },
+      });
+    });
+  }
+
+  return paths;
+}
+
+const { categoryData } = Astro.props;
+const { lang } = Astro.params;
+
+if (!categoryData) {
+  return Astro.redirect("/404");
+}
+
+// 2. Fetch all data passing the current language 'lang'
+const newsletterData = await getNewsletterData(lang);
+const services = await getServicesByCategory(categoryData.slug, lang);
+const globalHero = await getHeroPages(lang);
+
+// 3. Find the 'services' hero configuration
+const serviceHero = globalHero.find((hero) => hero.slug === "services");
+
+const heroProps = serviceHero
+  ? {
+      title: serviceHero.title,
+      description: serviceHero.description,
+    }
+  : null;
+---
+
+<Layout title={categoryData.metaTitle}>
+  <main>
+    {heroProps && <HeroPages {...heroProps} />}
+
+    <ServiceList
+      badge={categoryData.badge}
+      title={categoryData.title}
+      services={services}
+    />
+  </main>
+
+  <Advice />
+
+  {
+    newsletterData && (
+      <div class="relative z-10 -mt-24 md:mb-10">
+        <Newsletter {...newsletterData} />
+      </div>
+    )
+  }
+</Layout>

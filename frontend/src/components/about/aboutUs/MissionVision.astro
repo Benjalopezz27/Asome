@@ -1,0 +1,67 @@
+---
+import { ChevronDown } from "lucide-react";
+import Badge from "@/components/shared/badge.astro";
+import type { MissionItem } from "@/types";
+interface Props {
+  mission: MissionItem;
+  vision: MissionItem;
+  backgroundImage?: MissionItem["backGroundImage"];
+}
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+const { mission, vision, backgroundImage } = Astro.props;
+const backgroundImageUrl = backgroundImage?.url
+  ? `${STRAPI_URL}${backgroundImage.url}`
+  : null;
+const missionItem = Array.isArray(mission) ? mission[0] : mission;
+const visionItem = Array.isArray(vision) ? vision[0] : vision;
+---
+
+<section class="py-20">
+  {
+    backgroundImageUrl && (
+      <div class="absolute w-full h-full opacity-15">
+        <img src={backgroundImageUrl} alt="Fondo" class="w-full h-[122%] " />
+      </div>
+    )
+  }
+  <div class="space-y-20">
+    <div class="flex flex-col items-center text-center gap-6 py-10">
+      <div class="mb-4">
+        <Badge title={missionItem.badge} />
+      </div>
+
+      <h2 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
+        {missionItem.title}
+      </h2>
+
+      <div class="my-4 secondary-blue animate-bounce">
+        <ChevronDown className="size-8 stroke-3" />
+      </div>
+
+      <p
+        class="primary-gray text-lg md:text-[24px] leading-relaxed px-4 md:px-0 max-w-5xl"
+      >
+        {missionItem.description}
+      </p>
+    </div>
+
+    <div class="flex flex-col items-center text-center gap-6">
+      <div class="mb-4">
+        <Badge title={visionItem.badge || "Visión"} />
+      </div>
+
+      <h2 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
+        {visionItem.title}
+      </h2>
+
+      <div class="my-4 secondary-blue animate-bounce">
+        <ChevronDown className="size-8 stroke-3" />
+      </div>
+
+      <p class="primary-gray text-lg md:text-[24px] leading-relaxed max-w-5xl">
+        {visionItem.description}
+      </p>
+    </div>
+  </div>
+</section>

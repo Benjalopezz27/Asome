@@ -1,6 +1,4 @@
 ---
-// src/components/blocks/LogoSlider.astro
-
 const { title, logos } = Astro.props;
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
@@ -13,23 +11,19 @@ const infiniteLogos = [...logos, ...logos];
   <div
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-0"
   >
-    {/* 1. Título y Línea Divisoria (Lado Izquierdo) */}
     <div
       class="w-full md:w-1/4 flex items-center justify-center md:justify-start relative z-10 bg-[#F9FAFB]"
     >
       <div class="flex items-center gap-6">
         <h3
-          class="text-[#011F5B] font-bold text-2xl leading-tight text-center md:text-right max-w-50"
+          class="dark-blue font-bold text-2xl leading-tight text-center md:text-right max-w-50"
         >
           {title}
         </h3>
-        {/* Línea vertical visible solo en Desktop */}
-        <div class="hidden md:block w-0.5 h-16 bg-[#011F5B]"></div>
+        <div class="hidden md:block w-0.5 h-16 bg-dark-blue"></div>
       </div>
     </div>
     <div class="w-full md:w-3/4 relative overflow-hidden mask-gradient">
-      {/* Contenedor que se mueve (Track) */}
-
       <div class="flex items-center gap-16 animate-infinite-scroll w-max">
         {
           infiniteLogos.map((logo, index) => (
@@ -49,28 +43,23 @@ const infiniteLogos = [...logos, ...logos];
 </section>
 
 <style>
-  /* Animación CSS Personalizada */
   @keyframes scroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      /* Se mueve hacia la izquierda el 50% del ancho total (porque duplicamos la lista) */
       transform: translateX(-50%);
     }
   }
 
   .animate-infinite-scroll {
-    /* Ajusta los 30s para hacerlo más rápido o más lento */
     animation: scroll 30s linear infinite;
   }
 
-  /* Pausar la animación al pasar el mouse (opcional) */
   .animate-infinite-scroll:hover {
     animation-play-state: paused;
   }
 
-  /* Máscara para suavizar los bordes del slider (fade out a los lados) */
   .mask-gradient {
     mask-image: linear-gradient(
       to right,

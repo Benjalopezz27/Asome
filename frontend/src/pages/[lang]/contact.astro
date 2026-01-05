@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Newsletter from "@/components/common/Newsletter.astro";
+import { getHeroPages } from "@/lib/globalData";
+import { getNewsletterData } from "@/lib/homeData";
+import HeroPages from "@/components/common/HeroPages.astro";
+// 1. Import i18n utilities
+import { useTranslations } from "@/i18n/utils";
+
+// 2. Generate static paths for supported languages
+export async function getStaticPaths() {
+  return [{ params: { lang: "es-AR" } }, { params: { lang: "en" } }];
+}
+
+// 3. Get current language from params
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+// 4. Fetch localized data
+const newsletterData = await getNewsletterData(lang);
+const globalHero = await getHeroPages(lang);
+
+// 5. Find the specific hero (Ensure the slug is 'contact' in both Strapi locales)
+const contactHero = globalHero.find((hero) => hero.slug === "contact");
+
+const heroProps = contactHero
+  ? {
+      title: contactHero.title,
+      description: contactHero.description,
+      buttonText: contactHero.buttonText,
+      buttonUrl: contactHero.buttonUrl,
+      buttonIcon: contactHero.buttonIcon,
+    }
+  : null;
+---
+
+{/* Added dynamic title to Layout for better SEO */}
+<Layout title={t("nav.contact")}>
+  {heroProps && <HeroPages {...heroProps} />}
+
+  <p>Contact works</p>
+
+  {
+    newsletterData && (
+      <div class="relative z-10 -mt-24 md:mb-10 ">
+        <Newsletter {...newsletterData} />
+      </div>
+    )
+  }
+</Layout>

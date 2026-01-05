@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_members_sections",
+  "info": {
+    "displayName": "membersSection"
+  },
+  "options": {},
+  "attributes": {
+    "members": {
+      "type": "component",
+      "component": "elements.team-member-card",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
