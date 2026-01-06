@@ -8,7 +8,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     preview: {
-      allowedHosts: true
+      allowedHosts: ['asome-front-production.up.railway.app']
     }
   },
   integrations: [react()],
