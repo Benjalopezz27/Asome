@@ -33,7 +33,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
       <nav
         className={`${
           isClicked ? 'translate-x-0' : '-translate-x-full'
-        } fixed top-0 left-0 z-50 h-screen bg-white/95 backdrop-blur-sm transition-all duration-500 lg:hidden shadow-xl`}
+        } fixed top-0 left-0 z-50 h-full bg-white/95 backdrop-blur-sm transition-all duration-500 lg:hidden shadow-xl`}
       >
         <div className="h-full w-80 bg-background pt-32 px-6 flex flex-col overflow-y-auto">
           <ul className="space-y-6">

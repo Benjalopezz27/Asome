@@ -15,12 +15,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<footer class="bg-[#1E1E1E] relative text-white pb-16 pt-36">
+<footer class="bg-[#1E1E1E] relative text-white pb-16 pt-20 md:pt-36">
   <div class="absolute top-0 left-0 w-full transform -translate-y-1/2 z-20">
   </div>
   <div class="mx-auto px-6">
     <div
-      class="grid grid-cols-1 text-center
+      class="grid grid-cols-1 text-center gap-5
                     md:grid-cols-2 md:text-left md:items-start md:justify-items-center
                     lg:grid-cols-4 px-10 pt-6"
     >
