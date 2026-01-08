@@ -3,7 +3,7 @@ import { getImageUrl } from "@/lib/globalData";
 
 const { title, logos } = Astro.props;
 
-const infiniteLogos = [...logos, ...logos];
+const infiniteLogos = [...logos, ...logos, ...logos, ...logos];
 ---
 
 <section
@@ -24,11 +24,12 @@ const infiniteLogos = [...logos, ...logos];
         <div class="hidden md:block w-0.5 h-16 bg-dark-blue"></div>
       </div>
     </div>
+
     <div class="w-full md:w-3/4 relative overflow-hidden mask-gradient">
       <div class="flex items-center gap-16 animate-infinite-scroll w-max">
         {
           infiniteLogos.map((logo, index) => (
-            <div class="relative w-32 h-16 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <div class="relative w-40 h-20 md:w-48 md:h-24 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer">
               <img
                 src={getImageUrl(logo.image.url)}
                 alt={logo.name}
@@ -49,12 +50,13 @@ const infiniteLogos = [...logos, ...logos];
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-25%);
     }
   }
 
   .animate-infinite-scroll {
-    animation: scroll 30s linear infinite;
+    animation: scroll 40s linear infinite;
+    will-change: transform;
   }
 
   .animate-infinite-scroll:hover {
@@ -65,15 +67,15 @@ const infiniteLogos = [...logos, ...logos];
     mask-image: linear-gradient(
       to right,
       transparent,
-      black 10%,
-      black 90%,
+      black 5%,
+      black 95%,
       transparent
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
-      black 10%,
-      black 90%,
+      black 5%,
+      black 95%,
       transparent
     );
   }
