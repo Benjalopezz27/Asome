@@ -46,13 +46,16 @@ export async function getNavbarData(lang: string = DEFAULT_LANG): Promise<{ menu
   }
 }
 export function getImageUrl(url: string | undefined) {
+  console.log("URL RECIBIDA:", `"${url}"`);
   if (!url) return "";
 
+  const cleanUrl = url.trim();
 
-  if (url.startsWith("http") || url.startsWith("https")) {
-    return url;
+  if (cleanUrl.startsWith("http") || cleanUrl.startsWith("https")) {
+    return cleanUrl;
   }
 
+  const cleanPath = cleanUrl.startsWith("/") ? cleanUrl : `/${cleanUrl}`;
 
-  return `${STRAPI_URL}${url}`;
+  return `${STRAPI_URL}${cleanPath}`;
 }
