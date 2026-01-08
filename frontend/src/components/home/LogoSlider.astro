@@ -1,7 +1,15 @@
 ---
 const { title, logos } = Astro.props;
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = import.meta.env.STRAPI_URL || "http://localhost:1337";
+export const getImageUrl = (url: string | undefined) => {
+  if (!url) return "";
 
+  if (url.startsWith("http")) {
+    return url;
+  }
+
+  return `${STRAPI_URL}${url}`;
+};
 const infiniteLogos = [...logos, ...logos];
 ---
 
@@ -29,7 +37,7 @@ const infiniteLogos = [...logos, ...logos];
           infiniteLogos.map((logo, index) => (
             <div class="relative w-32 h-16 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
               <img
-                src={`${STRAPI_URL}${logo.image.url}`}
+                src={getImageUrl(logo.image.url)}
                 alt={logo.name}
                 class="max-w-full max-h-full object-contain"
                 loading={index < 5 ? "eager" : "lazy"}

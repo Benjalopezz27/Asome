@@ -1,9 +1,9 @@
 ---
 import { type Project } from "@/types";
-import { ArrowRight, Monitor } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getLangFromUrl, getLocalizedPath } from "@/i18n/utils";
 import Tag from "@/components/shared/tag.astro";
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = import.meta.env.STRAPI_URL || "http://localhost:1337";
 interface Props {
   project: Project;
 }
