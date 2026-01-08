@@ -1,4 +1,5 @@
 ---
+import { getImageUrl } from "@/lib/globalData";
 import { CalendarDays } from "lucide-react";
 const {
   title,
@@ -8,22 +9,17 @@ const {
   buttonUrl,
   buttonIcon,
 } = Astro.props;
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
-
-const bgUrl = backgroundImage?.url
-  ? `${STRAPI_URL}${backgroundImage.url}`
-  : null;
 ---
 
 <section
   class="relative bg-dark-blue text-white py-30 md:py-40 px-4 overflow-hidden"
 >
   {
-    bgUrl && (
+    backgroundImage && (
       <div class="absolute top-10 -right-36 h-full w-full md:w-1/2 pointer-events-none z-0">
         <img
-          src={bgUrl}
-          alt=""
+          src={getImageUrl(backgroundImage.url)}
+          alt={title}
           class="w-full h-full object-cover object-right opacity-10 "
         />
       </div>
