@@ -1,4 +1,5 @@
 ---
+import { getImageUrl } from "@/lib/globalData";
 import Badge from "../shared/badge.astro";
 
 // src/components/blocks/Hero.astro
@@ -26,24 +27,22 @@ interface Props {
 const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
   Astro.props;
 const lang = Astro.params.lang || "es-AR";
-const STRAPI_URL = import.meta.env.STRAPI_URL || "http://localhost:1337";
 
-const titleImageUrl = titleImage?.url ? `${STRAPI_URL}${titleImage.url}` : null;
-const backgroundImageUrl = backgroundImage?.url
-  ? `${STRAPI_URL}${backgroundImage.url}`
-  : null;
 const altText = titleImage?.alternativeText || "Frase principal";
-const contactHref = `/${lang}${buttonUrl}`;
+
+const contactHref = buttonUrl
+  ? `/${lang}${buttonUrl.startsWith("/") ? buttonUrl : "/" + buttonUrl}`
+  : "#";
 ---
 
 <section
   class="relative min-h-150 flex items-center justify-center text-center text-white h-[80%] md:h-[90%] overflow-hidden"
 >
   {
-    backgroundImageUrl && (
+    backgroundImage?.url && (
       <div class="absolute inset-0 z-0">
         <img
-          src={backgroundImageUrl}
+          src={getImageUrl(backgroundImage.url)}
           alt="Fondo"
           class="w-full h-full object-cover"
         />
@@ -55,20 +54,25 @@ const contactHref = `/${lang}${buttonUrl}`;
   <div
     class="relative z-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-16"
   >
-    <Badge
-      title={badge}
-      class="text-white border border-white bg-white/20 rounded-md px-2 py-1 text-sm w-1/2"
-    />
+    {
+      badge && (
+        <Badge
+          title={badge}
+          class="text-white border border-white bg-white/20 rounded-md px-2 py-1 text-sm w-1/2"
+        />
+      )
+    }
 
     {
-      titleImageUrl && (
+      titleImage?.url && (
         <img
-          src={titleImageUrl}
+          src={getImageUrl(titleImage.url)}
           alt={altText}
           class="w-full max-w-4xl h-auto mb-8"
         />
       )
     }
+
     <div>
       {
         buttonText && buttonUrl && (
@@ -78,7 +82,7 @@ const contactHref = `/${lang}${buttonUrl}`;
           >
             <span class="absolute inset-0 bg-[#1C39BB] transform scale-x-0 origin-left transition-transform rounded-lg duration-300 ease-in-out group-hover:scale-x-100" />
 
-            <span class="relative z-10 transition-colors  duration-300 ease-in-out group-hover:text-white">
+            <span class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-white">
               {buttonText}
             </span>
           </a>

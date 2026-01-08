@@ -1,7 +1,6 @@
 import fetchApi from './strapi';
-import { type CategoryData, type HeroPageData, type MenuItem, type NavbarLink, type NewsletterBlock, type Project, type Service } from '../types';
-import { type HomePageData, type AnyBlock  } from '../types';
-
+import { type HeroPageData, type MenuItem, type NavbarLink, type NewsletterBlock, type Project, type Service } from '../types';
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 const DEFAULT_LANG = 'es-AR'
 // 👇 1. Receive the language (default to 'es')
 export async function getHeroPages(lang: string = DEFAULT_LANG): Promise<HeroPageData[]>{
@@ -45,4 +44,15 @@ export async function getNavbarData(lang: string = DEFAULT_LANG): Promise<{ menu
     console.error("Error loading Navbar:", error);
     return { menuItems: [], cta: null };
   }
+}
+export function getImageUrl(url: string | undefined) {
+  if (!url) return "";
+
+
+  if (url.startsWith("http") || url.startsWith("https")) {
+    return url;
+  }
+
+
+  return `${STRAPI_URL}${url}`;
 }
