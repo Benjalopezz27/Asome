@@ -9,6 +9,7 @@ import PhasesSection from "@/components/projects/phasesSection.astro";
 import Advice from "@/components/common/Advice.astro";
 import Newsletter from "@/components/common/Newsletter.astro";
 import { getHomePageData } from "@/lib/homeData";
+import { getImageUrl } from "@/lib/globalData";
 export async function getStaticPaths() {
   const languages = ["es-AR", "en"];
   const paths = await Promise.all(
@@ -35,15 +36,10 @@ const t = useTranslations(lang as any);
 const imageData = Array.isArray(project.imageDescription)
   ? project.imageDescription[0]
   : project.imageDescription;
-let imageUrl = "/placeholder.jpg";
 
-if (imageData?.url) {
-  if (imageData.url.startsWith("http")) {
-    imageUrl = imageData.url;
-  } else {
-    imageUrl = `${STRAPI_URL}${imageData.url}`;
-  }
-}
+const imageUrl = imageData?.url
+  ? getImageUrl(imageData.url)
+  : "/placeholder.jpg";
 const newsletterData = blocks?.find(
   (b) => b.__component === "blocks.newsletter"
 ) as NewsletterBlock | undefined;
