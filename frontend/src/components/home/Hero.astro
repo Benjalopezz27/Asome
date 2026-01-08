@@ -1,4 +1,5 @@
 ---
+import { getImageUrl } from "@/lib/globalData";
 import Badge from "../shared/badge.astro";
 
 // src/components/blocks/Hero.astro
@@ -41,7 +42,7 @@ const contactHref = buttonUrl
     backgroundImage?.url && (
       <div class="absolute inset-0 z-0">
         <img
-          src={backgroundImage.url}
+          src={getImageUrl(backgroundImage.url)}
           alt="Fondo"
           class="w-full h-full object-cover"
         />
@@ -65,7 +66,7 @@ const contactHref = buttonUrl
     {
       titleImage?.url && (
         <img
-          src={titleImage.url}
+          src={getImageUrl(titleImage.url)}
           alt={altText}
           class="w-full max-w-4xl h-auto mb-8"
         />
