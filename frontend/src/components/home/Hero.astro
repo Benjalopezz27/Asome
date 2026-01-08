@@ -28,6 +28,16 @@ const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
 const lang = Astro.params.lang || "es-AR";
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
+export const getImageUrl = (url: string | undefined) => {
+  if (!url) return "";
+
+  if (url.startsWith("http")) {
+    return url;
+  }
+
+  return `${STRAPI_URL}${url}`;
+};
+
 const titleImageUrl = titleImage?.url ? `${STRAPI_URL}${titleImage.url}` : null;
 const backgroundImageUrl = backgroundImage?.url
   ? `${STRAPI_URL}${backgroundImage.url}`
@@ -43,7 +53,7 @@ const contactHref = `/${lang}${buttonUrl}`;
     backgroundImageUrl && (
       <div class="absolute inset-0 z-0">
         <img
-          src={backgroundImageUrl}
+          src={getImageUrl(backgroundImageUrl)}
           alt="Fondo"
           class="w-full h-full object-cover"
         />
@@ -63,7 +73,7 @@ const contactHref = `/${lang}${buttonUrl}`;
     {
       titleImageUrl && (
         <img
-          src={titleImageUrl}
+          src={getImageUrl(titleImageUrl)}
           alt={altText}
           class="w-full max-w-4xl h-auto mb-8"
         />
