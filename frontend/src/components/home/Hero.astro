@@ -25,6 +25,7 @@ interface Props {
 
 const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
   Astro.props;
+const lang = Astro.params.lang || "es-AR";
 const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 const titleImageUrl = titleImage?.url ? `${STRAPI_URL}${titleImage.url}` : null;
@@ -32,6 +33,7 @@ const backgroundImageUrl = backgroundImage?.url
   ? `${STRAPI_URL}${backgroundImage.url}`
   : null;
 const altText = titleImage?.alternativeText || "Frase principal";
+const contactHref = `/${lang}${buttonUrl}`;
 ---
 
 <section
@@ -71,7 +73,7 @@ const altText = titleImage?.alternativeText || "Frase principal";
       {
         buttonText && buttonUrl && (
           <a
-            href={buttonUrl}
+            href={contactHref}
             class="relative overflow-hidden primary-blue font-bold bg-white rounded-lg px-5 py-3 text-md lg:text-xl cursor-pointer group"
           >
             <span class="absolute inset-0 bg-[#1C39BB] transform scale-x-0 origin-left transition-transform rounded-lg duration-300 ease-in-out group-hover:scale-x-100" />

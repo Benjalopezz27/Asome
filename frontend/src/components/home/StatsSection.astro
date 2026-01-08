@@ -15,8 +15,9 @@ interface Props {
   buttonText?: string;
   buttonUrl?: string;
 }
-
+const lang = Astro.params.lang || "es-AR";
 const { title, description, stats, buttonText, buttonUrl } = Astro.props;
+const projectsHref = `/${lang}${buttonUrl}`;
 ---
 
 <section id="stats-section" class="py-20 bg-dark-blue text-white text-center">
@@ -47,7 +48,7 @@ const { title, description, stats, buttonText, buttonUrl } = Astro.props;
     {
       buttonText && (
         <a
-          href={buttonUrl || "#"}
+          href={projectsHref}
           class="inline-flex items-center gap-2 bg-primary-blue hover:bg text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300"
         >
           {buttonText}

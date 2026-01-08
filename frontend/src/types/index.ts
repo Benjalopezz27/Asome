@@ -144,7 +144,8 @@ export interface ProjectPhase {
   id: number;
   PhaseName: string;
   description: string;
-  items: IconTextItem[]; 
+  IconText: IconTextItem[]; 
+  descriptionPosition: 'left' | 'right';
 }
 
 export interface Project {

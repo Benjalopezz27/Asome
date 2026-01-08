@@ -11,6 +11,7 @@ import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 // 2. Get current language and translation function
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const contactHref = `/${lang}/contact`;
 ---
 
 <section class="w-full bg-[#F1F1F1] flex justify-center px-4 py-12 lg:py-20">
@@ -35,15 +36,15 @@ const t = useTranslations(lang);
         </h3>
       </div>
 
-      <button
+      <a
+        href={contactHref}
         class="bg-primary-blue text-white inline-flex items-center
                               justify-center lg:justify-start gap-2 font-bold
-                              py-3 px-4 rounded-xl w-full sm:w-fit mx-auto lg:mx-0"
+                              py-3 px-4 rounded-xl w-full sm:w-fit mx-auto lg:mx-0 cursor-pointer"
       >
-        {/* 3. Translate the Button text */}
         {t("btn.scheduleCall")}
         <RightArrowIcon />
-      </button>
+      </a>
     </div>
     <div class="bg-white rounded-4xl mt-8 lg:mt-0">
       <Image

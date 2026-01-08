@@ -12,6 +12,8 @@ import {
   Database,
   Globe,
   Boxes,
+  Clock,
+  Paperclip
 } from "lucide-react";
 
 export const iconMap: Record<string, any> = {
@@ -29,4 +31,6 @@ export const iconMap: Record<string, any> = {
   image: Image,
   database: Database,
   default: Bot,
+  clock: Clock,
+  pages: Paperclip
 };

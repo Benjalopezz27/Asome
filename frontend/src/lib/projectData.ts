@@ -1,6 +1,5 @@
 import fetchApi from './strapi';
-import { type CategoryData, type HeroPageData, type MenuItem, type NavbarLink, type NewsletterBlock, type Project, type Service } from '../types';
-import { type HomePageData, type AnyBlock  } from '../types';
+import {  type Project } from '../types';
 
 const DEFAULT_LANG = 'es-AR'
 

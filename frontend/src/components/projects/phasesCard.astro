@@ -1,0 +1,51 @@
+---
+import { iconMap } from "@/lib/constants";
+import type { ProjectPhase } from "@/types";
+interface Props {
+  phase: ProjectPhase;
+}
+const { phase } = Astro.props;
+
+const isImageRight = phase.descriptionPosition === "right";
+
+const borderRadiusClass = isImageRight
+  ? "lg:rounded-l-3xl lg:rounded-r-none"
+  : "lg:rounded-r-3xl lg:rounded-l-none";
+---
+
+<div
+  class={`flex flex-col lg:flex-row justify-center px-40 ${isImageRight ? "" : "lg:flex-row-reverse"}`}
+>
+  <div
+    class={`bg-[#F3F5FB] w-full lg:w-1/2  rounded-t-3xl lg:rounded-t-none p-8 md:px-14 md:py-14 md:mt-7 h-72 ${borderRadiusClass}`}
+  >
+    <div>
+      <h3 class="text-2xl md:text-[32px] font-bold dark-gray mb-6">
+        {phase.PhaseName}
+      </h3>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      {
+        phase.IconText?.map((item) => {
+          const IconComponent =
+            iconMap[item.icon || "default"] || iconMap.default;
+          return (
+            <div class="inline-flex items-center pb-2 text-xl font-medium text-gray-700  ">
+              <IconComponent className="size-5 stroke-2 mr-2 primary-blue" />
+              {item.text}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <div
+    class="w-full rounded-4xl text-white lg:w-[45%] flex items-center justify-center text-center px-8 shadow-lg h-87.5 bg-dark-blue text-lg font-normal"
+  >
+    <p>
+      {phase.description}
+    </p>
+  </div>
+</div>

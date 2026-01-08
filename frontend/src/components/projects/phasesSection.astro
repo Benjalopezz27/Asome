@@ -1,0 +1,28 @@
+---
+import { ChevronDown } from "lucide-react";
+import Badge from "../shared/badge.astro";
+import PhasesCard from "./phasesCard.astro";
+import type { ProjectPhase } from "@/types";
+interface Props {
+  phases: ProjectPhase[];
+}
+const { phases } = Astro.props;
+---
+
+<section>
+  <div class="flex flex-col items-center space-y-3 mt-16">
+    <Badge title="CASOS DE ÉXITO" />
+    <h2
+      class={`text-3xl md:text-[40px] font-bold max-w-xl text-center mx-auto leading-tight mt-5`}
+    >
+      Marcamos un antes y un después en tu negocio.
+    </h2>
+
+    <div class="mt-4 secondary-blue animate-bounce">
+      <ChevronDown className="size-8 stroke-3" />
+    </div>
+  </div>
+  <div class="flex flex-col gap-6">
+    {phases?.map((phase) => <PhasesCard phase={phase} />)}
+  </div>
+</section>
