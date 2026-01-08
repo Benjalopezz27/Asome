@@ -1,13 +1,13 @@
 ---
 import type { Service } from "@/types";
 import Tag from "./tag.astro";
+import { getImageUrl } from "@/lib/globalData";
 interface Props {
   service: Service;
 }
 
 const { service } = Astro.props;
 
-const STRAPI_URL = import.meta.env.STRAPI_URL || "http://localhost:1337";
 const isImageRight = service.imagePosition === "right";
 
 const borderRadiusClass = isImageRight
@@ -28,7 +28,6 @@ const borderRadiusClass = isImageRight
         </h3>
       </a>
 
-      {/* Tags */}
       <div class="flex flex-wrap gap-3">
         <Tag tags={service.tags || []} />
       </div>
@@ -42,7 +41,7 @@ const borderRadiusClass = isImageRight
     >
       <img
         src={service.coverImage?.url
-          ? `${STRAPI_URL}${service.coverImage.url}`
+          ? `${getImageUrl(service.coverImage.url)}`
           : "/placeholder.jpg"}
         alt={service.title}
         class="w-full h-full object-cover aspect-video lg:aspect-auto transform hover:scale-105 transition-transform duration-500"

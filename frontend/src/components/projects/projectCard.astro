@@ -3,7 +3,7 @@ import { type Project } from "@/types";
 import { ArrowRight } from "lucide-react";
 import { getLangFromUrl, getLocalizedPath } from "@/i18n/utils";
 import Tag from "@/components/shared/tag.astro";
-const STRAPI_URL = import.meta.env.STRAPI_URL || "http://localhost:1337";
+import { getImageUrl } from "@/lib/globalData";
 interface Props {
   project: Project;
 }
@@ -17,15 +17,10 @@ const projectUrl = getLocalizedPath(`/projects/${project.slug}`, lang);
 const imageData = Array.isArray(project.image)
   ? project.image[0]
   : project.image;
-let imageUrl = "/placeholder.jpg";
 
-if (imageData?.url) {
-  if (imageData.url.startsWith("http")) {
-    imageUrl = imageData.url;
-  } else {
-    imageUrl = `${STRAPI_URL}${imageData.url}`;
-  }
-}
+const imageUrl = imageData?.url
+  ? getImageUrl(imageData.url)
+  : "/placeholder.jpg";
 
 const isImageRight = project.imagePosition === "right";
 const borderRadiusClass = isImageRight

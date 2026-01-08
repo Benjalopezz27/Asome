@@ -2,17 +2,15 @@
 import { ChevronDown } from "lucide-react";
 import Badge from "@/components/shared/badge.astro";
 import type { MissionItem } from "@/types";
+import { getImageUrl } from "@/lib/globalData";
 interface Props {
   mission: MissionItem;
   vision: MissionItem;
   backgroundImage?: MissionItem["backGroundImage"];
 }
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 const { mission, vision, backgroundImage } = Astro.props;
-const backgroundImageUrl = backgroundImage?.url
-  ? `${STRAPI_URL}${backgroundImage.url}`
-  : null;
+const backgroundImageUrl = getImageUrl(backgroundImage?.url);
 const missionItem = Array.isArray(mission) ? mission[0] : mission;
 const visionItem = Array.isArray(vision) ? vision[0] : vision;
 ---
