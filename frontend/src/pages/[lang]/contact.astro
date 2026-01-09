@@ -4,7 +4,7 @@ import Newsletter from "@/components/common/Newsletter.astro";
 import { getHeroPages } from "@/lib/globalData";
 import { getNewsletterData } from "@/lib/homeData";
 import HeroPages from "@/components/common/HeroPages.astro";
-// 1. Import i18n utilities
+import Calendar from "@/components/contact/calendar.astro";
 import { useTranslations } from "@/i18n/utils";
 
 // 2. Generate static paths for supported languages
@@ -37,9 +37,9 @@ const heroProps = contactHero
 {/* Added dynamic title to Layout for better SEO */}
 <Layout title={t("nav.contact")}>
   {heroProps && <HeroPages {...heroProps} />}
-
-  <p>Contact works</p>
-
+  <main class="mb-20 pb-20">
+    <Calendar />
+  </main>
   {
     newsletterData && (
       <div class="relative z-10 -mt-24 md:mb-10 ">

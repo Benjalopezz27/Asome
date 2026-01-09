@@ -1,6 +1,7 @@
 ---
 import { getImageUrl } from "@/lib/globalData";
 import Badge from "../shared/badge.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 // src/components/blocks/Hero.astro
 
@@ -29,17 +30,29 @@ const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
 const lang = Astro.params.lang || "es-AR";
 
 const altText = titleImage?.alternativeText || "Frase principal";
-
+const langStatic = getLangFromUrl(Astro.url);
+const t = useTranslations(langStatic);
 const contactHref = buttonUrl
   ? `/${lang}${buttonUrl.startsWith("/") ? buttonUrl : "/" + buttonUrl}`
   : "#";
 ---
 
 <section
-  class="bg-dark-blue relative min-h-150 flex items-center justify-center text-center text-white h-[80%] md:h-[90%] overflow-hidden"
+  class="bg-dark-blue relative min-h-184 flex items-center justify-center text-center text-white h-[80%] md:h-[90%] overflow-hidden"
 >
+  {
+    backgroundImage && (
+      <div class="absolute -right-20 h-full w-full md:w-1/2 pointer-events-none z-0">
+        <img
+          src={getImageUrl(backgroundImage.url)}
+          alt={altText}
+          class="w-full h-full object-cover object-right opacity-40"
+        />
+      </div>
+    )
+  }
   <div
-    class="relative z-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-16"
+    class="relative px-4 sm:px-6 lg:px-8 lg:mt-14 flex flex-col items-center justify-center gap-16"
   >
     {
       badge && (
@@ -50,15 +63,11 @@ const contactHref = buttonUrl
       )
     }
 
-    {
-      titleImage?.url && (
-        <img
-          src={getImageUrl(titleImage.url)}
-          alt={altText}
-          class="w-full max-w-4xl h-auto mb-8"
-        />
-      )
-    }
+    <div class="max-w-5xl">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+        {t("hero.title")}
+      </h1>
+    </div>
 
     <div>
       {

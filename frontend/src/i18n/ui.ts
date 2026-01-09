@@ -8,6 +8,7 @@ export const languages = {
 export const defaultLang = 'es-AR';
 export const ui = {
   'es-AR': {
+    'hero.title': 'Dejá de pelear con tus procesos. Empezá a escalar con automatización.',
     'badge.contact': 'CONTACTO',
     'contactHome.title1': '¿Trabajemos juntos?',
     'contactHome.title2': 'Contáctanos.',
@@ -32,6 +33,7 @@ export const ui = {
     'footer.growthStage': 'Etapa de crecimiento',
   },
   en: {
+    'hero.title': 'Stop struggling with your processes. Start scaling with automation.',
     'badge.contact': 'CONTACT',
     'contactHome.title1': 'Let\'s work together?',
     'contactHome.title2': 'Contact us.',

@@ -4,7 +4,7 @@ import Header from "@/components/common/Header";
 import { getNavbarData } from "../lib/globalData";
 import Footer from "@/components/common/Footer.astro";
 import { getLangFromUrl } from "@/i18n/utils";
-
+import Logo from "@assets/logo.svg";
 const lang = getLangFromUrl(Astro.url);
 const { menuItems, cta } = await getNavbarData(lang);
 ---
@@ -14,9 +14,9 @@ const { menuItems, cta } = await getNavbarData(lang);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={Logo.src} />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Asomelab</title>
   </head>
   <body>
     <Header client:load menuItems={menuItems} ctaButton={cta} lang={lang} />
