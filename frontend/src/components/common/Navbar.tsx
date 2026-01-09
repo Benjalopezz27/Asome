@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { type MenuItem, type NavbarLink } from '../../types'; // Tus interfaces
+import { type MenuItem, type NavbarLink } from '../../types';
 import { getLocalizedPath } from "@/i18n/utils";
 
 interface NavbarProps {
@@ -29,6 +29,16 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
 
   return (
     <>
+      <div 
+        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${
+          isClicked 
+            ? 'opacity-100 visible' 
+            : 'opacity-0 invisible pointer-events-none'
+        }`}
+        onClick={toggleNavClick} 
+        aria-hidden="true"
+      />
+
       {/* ================= MOBILE NAVIGATION ================= */}
       <nav
         className={`${
@@ -88,8 +98,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
                 );
               }
 
-              // CASE 2: Single Link (elements.navbar-links)
-              // TypeScript now implies item is NavbarLink, so .url is valid
+              // CASE 2: Single Link
               const itemUrl = getLocalizedPath(item.url, lang);
 
               return (
@@ -125,7 +134,6 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
             
             // CASE 1: Dropdown
             if (item.__component === 'elements.dropdown') {
-              // Check if any child link is currently active
               const isChildActive = item.Links.some(l => getLocalizedPath(l.url, lang) === active);
 
               return (
