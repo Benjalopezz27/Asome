@@ -1,0 +1,18 @@
+# Asome (Asomelab)
+> Software, diseño y marketing basado en datos para escalar tu empresa.
+
+# Resumen
+Asome es una agencia de desarrollo de software y automatización de procesos. Ayudamos a empresas en crecimiento a dejar de pelear con sus procesos manuales y empezar a escalar mediante soluciones a medida.
+
+# Documentación Completa para LLMs
+- /llms-full.txt: Contexto completo de la empresa, servicios, stack tecnológico y metodología.
+
+# Mapa del Sitio (Secciones Principales)
+- /: Página de inicio y propuesta de valor.
+- /projects: Portafolio de casos de éxito y desarrollos realizados.
+- /about: Información sobre el equipo y nuestra filosofía.
+- /contact: Información para agendar asesorías.
+- /services/software: Información sobre los servicios de software que ofrecemos
+- /services/design: Información sobre los servicios de diseño que ofrecemos
+- /services/marketing: Información sobre los servicios de marketing que ofrecemos
+- /blog: Página del blog.

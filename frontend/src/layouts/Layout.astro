@@ -5,8 +5,26 @@ import { getNavbarData } from "../lib/globalData";
 import Footer from "@/components/common/Footer.astro";
 import { getLangFromUrl } from "@/i18n/utils";
 import Logo from "@assets/logo.svg";
+import { SEO } from "astro-seo";
 const lang = getLangFromUrl(Astro.url);
 const { menuItems, cta } = await getNavbarData(lang);
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+const {
+  title = "Asome - Automatización de procesos con software a medida",
+  description = "Asomelab - Automatización de procesos con software a medida para empresas en crecimiento.",
+  image = "/og-image-default.png",
+  canonical = new URL(
+    Astro.url.pathname,
+    Astro.site || "https://asome-front-production.up.railway.app"
+  ).toString(),
+  noindex = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,30 +32,43 @@ const { menuItems, cta } = await getNavbarData(lang);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href={Logo.src} />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Asomelab - Automatización de procesos con software a medida para empresas en crecimiento. "
+
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      noindex={noindex}
+      nofollow={noindex}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: image,
+        },
+        image: {
+          alt: "Asomelab Preview",
+        },
+        optional: {
+          description: description,
+          siteName: "Asomelab",
+        },
+      }}
+      extend={{
+        meta: [
+          {
+            name: "keywords",
+            content:
+              "automatización, software a medida, empresas en crecimiento, procesos automatizados",
+          },
+          { name: "author", content: "Asomelab" },
+          { name: "generator", content: Astro.generator },
+        ],
+        link: [
+          { rel: "icon", type: "image/svg+xml", href: Logo.src },
+          { rel: "llms-txt", href: "/llms.txt" },
+        ],
+      }}
     />
-    <meta
-      name="keywords"
-      content="automatización, software a medida, empresas en crecimiento, procesos automatizados"
-    />
-    <meta name="author" content="Asomelab" />
-    <meta name="robots" content="index, follow" />
-    <meta
-      property="og:title"
-      content="Asomelab - Automatización de procesos con software a medida"
-    />
-    <meta
-      property="og:description"
-      content="Asomelab - Automatización de procesos con software a medida para empresas en crecimiento. "
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://asomelab.com" />
-    <link rel="canonical" href="https://asomelab.com" />
-    <title>Asome - Automatización de procesos con software a medida</title>
   </head>
   <body>
     <Header client:load menuItems={menuItems} ctaButton={cta} lang={lang} />

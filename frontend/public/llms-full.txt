@@ -1,0 +1,54 @@
+# Asome (Asomelab) - Documentación Principal
+
+## 1. Misión y Propuesta de Valor
+Asome se especializa en crear ecosistemas digitales para empresas que buscan escalar. Nuestra filosofía es simple: "Dejá de pelear con tus procesos. Empezá a escalar con automatización".
+
+No somos solo una empresa de software; somos socios estratégicos que analizan el negocio para implementar:
+- Automatización de procesos repetitivos.
+- Software de gestión a medida (ERP/CRM).
+- Landing pages y E-commerce de alto rendimiento.
+- Diseño UX/UI enfocado en conversión.
+
+## 2. Servicios Principales
+
+### Desarrollo de Software a Medida
+Creamos herramientas específicas para las necesidades del negocio, desde paneles de administración para insumos médicos hasta sistemas de gestión de pedidos.
+- **Stack Tecnológico:** Usamos tecnologías modernas y escalables como Astro, React, Strapi (Headless CMS) y PostgreSQL.
+
+### Automatización de Procesos
+Identificamos cuellos de botella operativos y los eliminamos mediante software, permitiendo que el equipo se enfoque en tareas de alto valor.
+
+### Diseño y Marketing
+- Diseño de interfaces (UI) y experiencias de usuario (UX) en Figma.
+- Estrategias de marketing digital para potenciar los productos desarrollados.
+
+## 3. Metodología de Trabajo
+Nuestros proyectos se dividen en fases claras para asegurar el éxito:
+1. **Discovery:** Análisis profundo del problema y requerimientos.
+2. **Diseño (UX/UI):** Prototipado visual y validación de flujos.
+3. **Desarrollo:** Implementación del código usando arquitectura moderna.
+4. **Testing & QA:** Aseguramiento de calidad.
+5. **Despliegue e Infraestructura:** Puesta en producción (Railway, Vercel, etc.).
+
+## 4. Casos de Éxito (Proyectos Destacados)
+
+### Proyecto: Plataforma de Flexigom
+
+### Proyecto: KTM
+
+### Proyecto: Asome Web (Sitio Corporativo)
+- **Tecnologías:** Astro, Tailwind CSS, Strapi CMS, Cloudinary.
+- **Características:** Sitio estático de alto rendimiento (SSG), soporte multi-idioma (i18n), optimización SEO avanzada.
+
+## 5. Equipo
+Contamos con un equipo multidisciplinario experto en:
+- Desarrollo Full Stack.
+- Arquitectura de Software.
+- Diseño de Producto.
+- Manejo de Redes Sociales.
+- Diseños UI/UX
+
+## 6. Contacto
+Ofrecemos asesorías gratuitas, sin costo y sin compromiso, para evaluar la viabilidad de los proyectos.
+- **Sitio Web:** https://asomelab.com
+- **Ubicación:** Argentina (Trabajamos remoto globalmente).

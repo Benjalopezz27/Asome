@@ -6,10 +6,12 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://asome-front-production.up.railway.app',
   vite: {
+    // @ts-ignore
     plugins: [tailwindcss()],
     preview: {
-      allowedHosts: ['asomelab.com']
+      allowedHosts: ['https://asome-front-production.up.railway.app']
     }
   },
   integrations: [react(), sitemap(
@@ -20,12 +22,8 @@ export default defineConfig({
           'es-AR': 'es-AR',
           'en': 'en',
         }
-      },
-      // @ts-ignore
-      routing: {
-        prefixDefaultLocale: true,
-        redirectToDefaultLocale: true
       }
+      
     }
   )],
   
