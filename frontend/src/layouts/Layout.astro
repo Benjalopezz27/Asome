@@ -6,8 +6,24 @@ import Footer from "@/components/common/Footer.astro";
 import { getLangFromUrl } from "@/i18n/utils";
 import Logo from "@assets/logo.svg";
 import { SEO } from "astro-seo";
+
 const lang = getLangFromUrl(Astro.url);
 const { menuItems, cta } = await getNavbarData(lang);
+
+const isEnglish = lang === "en";
+
+const defaultTitle = isEnglish
+  ? "Asome - Process Automation with Custom Software"
+  : "Asome - Automatización de procesos con software a medida";
+
+const defaultDescription = isEnglish
+  ? "Asomelab - Process automation with custom software for growing companies."
+  : "Asomelab - Automatización de procesos con software a medida para empresas en crecimiento.";
+
+const defaultKeywords = isEnglish
+  ? "Home software development agency, web development Services Software custom software development, web applications Services Design UX/UI design, professional web design Services Marketingdigital marketing, SEO Projects web development portfolio, success stories"
+  : "Home agencia desarrollo software, desarrollo web Servicios Software desarrollo software a medida, aplicaciones web Servicios Diseño diseño UX/UI, diseño web profesional Servicios Marketingmarketing digital, SEO Proyectos portfolio desarrollo web, casos de éxito";
+
 interface Props {
   title?: string;
   description?: string;
@@ -15,9 +31,10 @@ interface Props {
   canonical?: string;
   noindex?: boolean;
 }
+
 const {
-  title = "Asome - Automatización de procesos con software a medida",
-  description = "Asomelab - Automatización de procesos con software a medida para empresas en crecimiento.",
+  title = defaultTitle,
+  description = defaultDescription,
   image = "/og-image-default.png",
   canonical = new URL(
     Astro.url.pathname,
@@ -28,7 +45,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -51,14 +68,14 @@ const {
         optional: {
           description: description,
           siteName: "Asomelab",
+          locale: isEnglish ? "en_US" : "es_AR",
         },
       }}
       extend={{
         meta: [
           {
             name: "keywords",
-            content:
-              "automatización, software a medida, empresas en crecimiento, procesos automatizados",
+            content: defaultKeywords,
           },
           { name: "author", content: "Asomelab" },
           { name: "generator", content: Astro.generator },
