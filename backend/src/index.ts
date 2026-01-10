@@ -5,7 +5,7 @@ import {
   servicesSeedData,
   tagsSeedData,
   navbarSeedData 
-} from '../../backend/src/seeds/data'; 
+} from '../src/seeds/data'; 
 import type { Core } from '@strapi/strapi';
 
 export default {
