@@ -6,7 +6,13 @@ import Footer from "@/components/common/Footer.astro";
 import { getLangFromUrl } from "@/i18n/utils";
 import Logo from "@assets/logo.svg";
 import { SEO } from "astro-seo";
-
+// 1. Importar el componente y los tipos
+import JsonLd from "@/components/seo/JsonLd.astro";
+import type {
+  WithContext,
+  Organization,
+  ProfessionalService,
+} from "schema-dts";
 const lang = getLangFromUrl(Astro.url);
 const { menuItems, cta } = await getNavbarData(lang);
 
@@ -31,7 +37,27 @@ interface Props {
   canonical?: string;
   noindex?: boolean;
 }
-
+const organizationSchema: WithContext<ProfessionalService> = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Asome (Asomelab)",
+  url: Astro.site ? Astro.site.toString() : "https://asomelab.com",
+  logo: "https://asomelab.com/logo.png",
+  description: isEnglish
+    ? "Process automation with custom software for growing companies."
+    : "Automatización de procesos con software a medida para empresas en crecimiento.",
+  sameAs: [
+    "https://www.linkedin.com/company/asomelab",
+    "https://www.instagram.com/asomelab",
+    // Agrega aquí todas tus redes sociales
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AR",
+    addressLocality: "Tucumán", // O tu ciudad principal
+  },
+  priceRange: "$$", // Requerido a veces para servicios profesionales
+};
 const {
   title = defaultTitle,
   description = defaultDescription,

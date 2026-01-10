@@ -23,5 +23,8 @@
     "serve": "^14.2.5",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "schema-dts": "^1.1.5"
   }
 }
