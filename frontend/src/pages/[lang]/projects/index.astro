@@ -43,7 +43,7 @@ const newsletterData = blocks?.find(
 <Layout title={t("nav.projects")}>
   {heroProps && <HeroPages {...heroProps} />}
 
-  <section class="py-16 md:py-24 bg-white">
+  <section class="pb-16 md:pb-24 pt-6 bg-white">
     <div class="max-w-full mx-auto">
       {projects?.map((project) => <ProjectCard project={project} />)}
     </div>
