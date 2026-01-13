@@ -15,7 +15,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<footer class="bg-[#1E1E1E] relative text-white pb-16 pt-20 md:pt-36">
+<footer role="contentinfo" class="bg-[#1E1E1E] relative pb-16 pt-20 md:pt-36">
   <div class="absolute top-0 left-0 w-full transform -translate-y-1/2 z-20">
   </div>
   <div class="mx-auto px-6">
@@ -29,11 +29,13 @@ const t = useTranslations(lang);
       </div>
 
       <div>
-        <h3 class="font-medium text-xl mb-4">{t("footer.contact")}</h3>
-        <a href="mailto:hola@asomelab.com" class="text-muted-foreground mb-3">
+        <h3 class="font-medium text-white text-xl mb-4">
+          {t("footer.contact")}
+        </h3>
+        <a href="mailto:hola@asomelab.com" class="text-gray-300 mb-3">
           hola<span class="primary-blue">@</span>asomelab.com
         </a>
-        <div class="flex justify-center md:justify-start gap-1 mt-3">
+        <div class="flex text-white justify-center md:justify-start gap-1 mt-3">
           <a href="#" target="_blank" aria-label="Whatsapp">
             <WhatsappIcon class="size-8" />
           </a>
@@ -50,8 +52,8 @@ const t = useTranslations(lang);
       </div>
 
       <div>
-        <h3 class="font-medium text-xl mb-4">{t("footer.home")}</h3>
-        <ul class="space-y-2">
+        <h3 class="font-medium text-white text-xl mb-4">{t("footer.home")}</h3>
+        <ul class="space-y-2 text-gray-300">
           <li>
             <a href={getLocalizedPath("/about/work-with-us", lang)}
               >{t("footer.workWithUs")}</a
@@ -72,8 +74,10 @@ const t = useTranslations(lang);
       </div>
 
       <div>
-        <h3 class="font-medium text-xl mb-4">{t("footer.services")}</h3>
-        <ul class="space-y-2">
+        <h3 class="font-medium text-white text-xl mb-4">
+          {t("footer.services")}
+        </h3>
+        <ul class="space-y-2 text-gray-300">
           <li>
             <a href={getLocalizedPath("/services/software", lang)}
               >{t("footer.buildStage")}</a

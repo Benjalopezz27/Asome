@@ -40,7 +40,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
       />
 
       {/* ================= MOBILE NAVIGATION ================= */}
-      <nav
+      <nav role='navigation'
         className={`${
           isClicked ? 'translate-x-0' : '-translate-x-full'
         } fixed top-0 left-0 z-50 h-full bg-white/95 backdrop-blur-sm transition-all duration-500 lg:hidden shadow-xl`}

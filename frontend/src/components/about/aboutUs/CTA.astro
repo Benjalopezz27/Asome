@@ -1,0 +1,39 @@
+---
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLocalizedPath,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const workWithUsUrl = getLocalizedPath("/about/work-with-us", lang);
+---
+
+<div
+  class="bg-gray-200 w-full h-1/2 lg:h-2/3 flex flex-col md:flex-row items-center justify-center pb-30 px-6 md:px-0"
+>
+  <div class="w-md mb-5 md:mb-0">
+    <h3
+      class="font-bold text-xl text-center md:text-start md:text-3xl lg:text-[40px] dark-blue"
+    >
+      {t("cta.workWithUs")}
+    </h3>
+  </div>
+
+  <a href={workWithUsUrl} class="block">
+    <button
+      class="relative overflow-hidden text-white font-bold bg-[#1C39BB] rounded-lg px-5 py-3 text-md lg:text-xl cursor-pointer group"
+    >
+      <span
+        class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-[#1C39BB]"
+      >
+        {t("cta.button")}
+      </span>
+      <span
+        class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"
+      ></span>
+    </button>
+  </a>
+</div>

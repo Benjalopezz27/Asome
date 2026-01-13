@@ -10,6 +10,7 @@ import HeroPages from "@/components/common/HeroPages.astro";
 import TeamMemberCard from "@/components/about/aboutUs/memberCard.astro";
 import MissionVision from "@/components/about/aboutUs/MissionVision.astro";
 import FeatureGrid from "@/components/home/FeatureGrid.astro";
+import CTA from "@/components/about/aboutUs/CTA.astro";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es-AR" } }, { params: { lang: "en" } }];
@@ -75,7 +76,7 @@ const newsletterData = homeBlocks?.find(
       return null;
     })
   }
-
+  <CTA />
   <Advice />
 
   {

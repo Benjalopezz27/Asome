@@ -23,7 +23,7 @@ const Header = ({ menuItems, ctaButton, lang }: HeaderProps) => {
   const ctaUrl = ctaButton ? getLocalizedPath(ctaButton.url, lang) : '#';
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between lg:justify-around px-5 lg:px-20 py-6 shadow-md bg-white z-50">
+    <header role="banner" className="fixed top-0 left-0 w-full flex items-center justify-between lg:justify-around px-5 lg:px-20 py-6 shadow-md bg-white z-50">
       <a href={logoUrl} className="flex items-center z-50">
         <Logo />
       </a>

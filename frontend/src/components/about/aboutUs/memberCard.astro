@@ -15,9 +15,11 @@ const imageObj = Array.isArray(member.memberPicture)
 const imageUrl = getImageUrl(imageObj?.url);
 ---
 
-<div class="group h-112 w-full perspective-[1000px]">
+<div
+  class="group h-112 w-full perspective-[1000px] flip-card-container cursor-pointer"
+>
   <div
-    class="relative h-full w-full transition-all duration-700 transform-3d group-hover:transform-[rotateY(180deg)]"
+    class="flip-card-inner relative h-full w-full transition-all duration-700 transform-3d group-hover:transform-[rotateY(180deg)] [&.is-flipped]:transform-[rotateY(180deg)]"
   >
     <div class="absolute inset-0 h-full w-full backface-hidden overflow-hidden">
       {
@@ -35,7 +37,7 @@ const imageUrl = getImageUrl(imageObj?.url);
       }
 
       <div class="absolute bottom-0 left-0 w-full text-center px-2">
-        <h3 class="text-black text-3xl font-medium mb-1">{member.name}</h3>
+        <h5 class="text-black text-3xl font-medium mb-1">{member.name}</h5>
         <p class="secondary-blue font-regular text-xl">{member.role}</p>
       </div>
     </div>
@@ -48,7 +50,7 @@ const imageUrl = getImageUrl(imageObj?.url);
           href={member.linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="block hover:scale-110 transition-transform duration-300"
+          class="linkedin-link block hover:scale-110 transition-transform duration-300"
         >
           <div>
             <LinkedinIcon class="size-8" />
@@ -63,3 +65,48 @@ const imageUrl = getImageUrl(imageObj?.url);
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      // Especificamos que es una lista de elementos HTML
+      const cards = document.querySelectorAll(".flip-card-container");
+
+      cards.forEach((card) => {
+        card.addEventListener("click", function (this: HTMLElement, e) {
+          const inner = this.querySelector(".flip-card-inner");
+
+          const target = e.target as HTMLElement;
+
+          if (!target.closest(".linkedin-link")) {
+            inner?.classList.toggle("is-flipped");
+          }
+        });
+
+        card.addEventListener("mouseleave", function (this: HTMLElement) {
+          const inner = this.querySelector(".flip-card-inner");
+          inner?.classList.remove("is-flipped");
+        });
+      });
+    },
+    { once: false }
+  );
+
+  const cards = document.querySelectorAll(".flip-card-container");
+  cards.forEach((card) => {
+    card.addEventListener("click", function (this: HTMLElement, e) {
+      const inner = this.querySelector(".flip-card-inner");
+      const target = e.target as HTMLElement;
+
+      if (!target.closest(".linkedin-link")) {
+        inner?.classList.toggle("is-flipped");
+      }
+    });
+
+    card.addEventListener("mouseleave", function (this: HTMLElement) {
+      const inner = this.querySelector(".flip-card-inner");
+      inner?.classList.remove("is-flipped");
+    });
+  });
+</script>

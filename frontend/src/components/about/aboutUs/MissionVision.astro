@@ -15,23 +15,16 @@ const missionItem = Array.isArray(mission) ? mission[0] : mission;
 const visionItem = Array.isArray(vision) ? vision[0] : vision;
 ---
 
-<section class="py-20">
-  {
-    backgroundImageUrl && (
-      <div class="absolute w-full h-full opacity-15">
-        <img src={backgroundImageUrl} alt="Fondo" class="w-full h-[122%] " />
-      </div>
-    )
-  }
+<section class="py-20 bg-gray-200">
   <div class="space-y-20">
     <div class="flex flex-col items-center text-center gap-6 py-10">
       <div class="mb-4">
         <Badge title={missionItem.badge} />
       </div>
 
-      <h2 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
+      <h3 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
         {missionItem.title}
-      </h2>
+      </h3>
 
       <div class="my-4 secondary-blue animate-bounce">
         <ChevronDown className="size-8 stroke-3" />
@@ -49,9 +42,9 @@ const visionItem = Array.isArray(vision) ? vision[0] : vision;
         <Badge title={visionItem.badge || "Visión"} />
       </div>
 
-      <h2 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
+      <h4 class="text-3xl md:text-4xl font-bold dark-gray mb-2">
         {visionItem.title}
-      </h2>
+      </h4>
 
       <div class="my-4 secondary-blue animate-bounce">
         <ChevronDown className="size-8 stroke-3" />

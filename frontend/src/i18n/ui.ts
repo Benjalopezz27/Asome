@@ -31,7 +31,10 @@ export const ui = {
     'footer.services': 'Servicios',
     'footer.buildStage': 'Etapa de construcción',
     'footer.growthStage': 'Etapa de crecimiento',
+    'cta.workWithUs': '¿Querés trabajar con nosotros?',
+    'cta.button': 'Puestos de trabajo',
   },
+  
   en: {
     'hero.title': 'Stop struggling with your processes. Start scaling with automation.',
     'badge.contact': 'CONTACT',
@@ -56,5 +59,7 @@ export const ui = {
     'footer.services': 'Services',
     'footer.buildStage': 'Build stage',
     'footer.growthStage': 'Growth stage',
+    'cta.workWithUs': 'Do you want to work with us?',
+    'cta.button': 'Job openings',
   },
 } as const;

@@ -54,9 +54,9 @@ const organizationSchema: WithContext<ProfessionalService> = {
   address: {
     "@type": "PostalAddress",
     addressCountry: "AR",
-    addressLocality: "Tucumán", // O tu ciudad principal
+    addressLocality: "Tucumán",
   },
-  priceRange: "$$", // Requerido a veces para servicios profesionales
+  priceRange: "$$",
 };
 const {
   title = defaultTitle,
@@ -68,11 +68,34 @@ const {
   ).toString(),
   noindex = false,
 } = Astro.props;
+const skipToContentText = isEnglish
+  ? "Skip to main content"
+  : "Saltar al contenido principal";
+  const GA_ID = import.meta.env.PUBLIC_GA_ID;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
+    <!-- Google Tag Manager -->
+    {GA_ID && (
+      <>
+        <script 
+          async 
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        ></script>
+        
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        </script>
+      </>
+    )}
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
 
@@ -114,9 +137,25 @@ const {
     />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WFPZB7RR"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:px-6 focus:py-3 focus:bg-white focus:text-dark-blue focus:font-bold focus:rounded-md focus:shadow-xl focus:ring-4 focus:ring-blue-300 transition-all"
+    >
+      {skipToContentText}
+    </a>
     <Header client:load menuItems={menuItems} ctaButton={cta} lang={lang} />
-
-    <slot />
+    <main role="main" id="main-content">
+      <slot />
+    </main>
 
     <Footer />
   </body>

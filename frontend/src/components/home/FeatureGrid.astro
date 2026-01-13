@@ -30,11 +30,11 @@ const currentStyle = styles[variant] || styles.default;
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 text-center">
     <div class="flex flex-col items-center space-y-4 mb-16">
       <Badge title={badge} />
-      <h2
+      <h3
         class={`text-3xl md:text-[40px] font-bold max-w-3xl mx-auto leading-tight mt-5`}
       >
         {title}
-      </h2>
+      </h3>
 
       <div class="mt-4 secondary-blue animate-bounce">
         <ChevronDown className="size-8 stroke-3" />
@@ -52,11 +52,11 @@ const currentStyle = styles[variant] || styles.default;
           lg:w-[calc(33.33%-16px)]     
         `}
           >
-            <h3
+            <h4
               class={`${currentStyle.title} text-3xl font-bold primary-gray mb-4`}
             >
               {feature.title}
-            </h3>
+            </h4>
             <p
               class={
                 currentStyle.description +
