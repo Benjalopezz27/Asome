@@ -24,7 +24,7 @@ const Header = ({ menuItems, ctaButton, lang }: HeaderProps) => {
 
   return (
     <header role="banner" className="fixed top-0 left-0 w-full flex items-center justify-between lg:justify-around px-5 lg:px-20 py-6 shadow-md bg-white z-50">
-      <a href={logoUrl} className="flex items-center z-50">
+      <a href={logoUrl} aria-label="home" className="flex items-center z-50">
         <Logo />
       </a>
 
@@ -38,6 +38,7 @@ const Header = ({ menuItems, ctaButton, lang }: HeaderProps) => {
 
       {ctaButton && (
         <a
+          aria-label={ctaButton.label}
           href={ctaUrl}
           className="hidden lg:block bg-dark-blue text-white font-bold px-6 py-2 rounded-md text-sm transition-colors duration-300"
         >

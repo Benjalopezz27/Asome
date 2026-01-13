@@ -42,7 +42,7 @@ const contactHref = buttonUrl
 >
   {
     backgroundImage && (
-      <div class="absolute -right-30 top-20 h-[120%] md:w-[60%] pointer-events-none z-0">
+      <div class="absolute -right-30 top-20 h-[120%] lg:w-[60%] pointer-events-none z-0">
         <img
           loading="lazy"
           src={getImageUrl(backgroundImage.url)}
@@ -74,6 +74,7 @@ const contactHref = buttonUrl
       {
         buttonText && buttonUrl && (
           <a
+            aria-label="Contact us"
             href={contactHref}
             class="relative overflow-hidden primary-blue font-bold bg-white rounded-lg px-5 py-3 text-md lg:text-xl cursor-pointer group"
           >

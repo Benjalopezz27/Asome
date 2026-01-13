@@ -176,6 +176,7 @@ const Navbar = ({ isClicked, toggleNavClick, menuItems, ctaButton, lang }: Navba
             return (
               <li key={item.id}>
                 <a
+                aria-label={item.label}
                   href={itemUrl}
                   className={`${
                     active === itemUrl ? 'primary-blue' : 'text-black'
