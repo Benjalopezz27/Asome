@@ -154,6 +154,25 @@ const skipToContentText = isEnglish
     </a>
     <Header client:load menuItems={menuItems} ctaButton={cta} lang={lang} />
     <main role="main" id="main-content">
+      <link
+  href="https://assets.calendly.com/assets/external/widget.css"
+  rel="stylesheet"
+/>
+<script
+  src="https://assets.calendly.com/assets/external/widget.js"
+  type="text/javascript"
+  async></script>
+<script type="text/javascript">
+  window.onload = function () {
+    Calendly.initBadgeWidget({
+      url: "https://calendly.com/hola-asomelab/reunion-de-descubrimiento",
+      text: "Agendá una reunión gratuita",
+      color: "#0069ff",
+      textColor: "#ffffff",
+      branding: true,
+    });
+  };
+</script>
       <slot />
     </main>
 

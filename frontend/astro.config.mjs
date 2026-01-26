@@ -6,7 +6,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://asome-front-production.up.railway.app',
+  site: 'https://asomelab.com',
   vite: {
     // @ts-ignore
     plugins: [tailwindcss()],

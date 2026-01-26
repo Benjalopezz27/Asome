@@ -4,7 +4,8 @@ import FacebookIcon from "../shared/icons/facebookIcon.astro";
 import InstagramIcon from "../shared/icons/instagramIcon.astro";
 import LinkedinIcon from "../shared/icons/linkedinIcon.astro";
 import WhatsappIcon from "../shared/icons/whatsapp.astro";
-
+const linkedinUrl =
+  "https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A107659926&keywords=Asome%20Lab&origin=ENTITY_SEARCH_HOME_HISTORY&sid=oW!";
 import {
   getLangFromUrl,
   useTranslations,
@@ -39,13 +40,21 @@ const t = useTranslations(lang);
           <a href="#" target="_blank" aria-label="Whatsapp">
             <WhatsappIcon class="size-8" />
           </a>
-          <a href="#" target="_blank" aria-label="Instagram">
+          <a
+            href="https://www.instagram.com/asomelab/"
+            target="_blank"
+            aria-label="Instagram"
+          >
             <InstagramIcon class="size-8" />
           </a>
-          <a href="#" target="_blank" aria-label="LinkedIn">
+          <a href={linkedinUrl} target="_blank" aria-label="LinkedIn">
             <LinkedinIcon class="size-8" />
           </a>
-          <a href="#" target="_blank" aria-label="Facebook">
+          <a
+            href="https://www.facebook.com/profile.php/?id=61581113521682"
+            target="_blank"
+            aria-label="Facebook"
+          >
             <FacebookIcon class="size-8" />
           </a>
         </div>
