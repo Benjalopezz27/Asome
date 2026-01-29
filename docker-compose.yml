@@ -26,10 +26,10 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      APP_KEYS: ${APP_KEYS}
-      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      APP_KEYS: bFJxmTrzMZ1tuSKuV7qVTw==,TlRu8IVYLC8diTILqGbj+w==,IuDibmTsUK0sv4unK3Eefw==,3+zX7cf5/TAKpEmUX1DTOw==
+      API_TOKEN_SALT: pNS9W34ZN4n3dW0H81H92A==
+      ADMIN_JWT_SECRET: /vtGvfDWkbwavbsFdPXmzA==
+      TRANSFER_TOKEN_SALT: 7mFabl7756OljlAEfOkfAQ==
     volumes:
       - ./backend/config:/opt/app/config
       - ./backend/src:/opt/app/src

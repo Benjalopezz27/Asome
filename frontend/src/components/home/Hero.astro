@@ -15,7 +15,7 @@ interface Image {
 }
 
 interface Props {
-  titleImage: Image["data"]["attributes"];
+  title: string;
   subtitle?: string;
   backgroundImage?: {
     url: string;
@@ -25,11 +25,11 @@ interface Props {
   badge?: string;
 }
 
-const { titleImage, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
+const { title, subtitle, backgroundImage, buttonText, badge, buttonUrl } =
   Astro.props;
 const lang = Astro.params.lang || "es-AR";
 
-const altText = titleImage?.alternativeText || "Frase principal";
+const altText = title;
 const langStatic = getLangFromUrl(Astro.url);
 const t = useTranslations(langStatic);
 const contactHref = buttonUrl
@@ -65,9 +65,11 @@ const contactHref = buttonUrl
     }
 
     <div class="max-w-5xl">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
-        {t("hero.title")}
-      </h1>
+      {
+        title && (
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">{title}</h1>
+        )
+      }
     </div>
 
     <div>

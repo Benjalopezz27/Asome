@@ -17,8 +17,6 @@ export async function getHomePageData(lang: string = DEFAULT_LANG): Promise<Home
         'populate[blocks][on][blocks.service-section][populate][services][populate][coverImage][fields]': 'url',
         'populate[blocks][on][blocks.service-section][populate][services][populate][tags][populate]': '*',
         'populate[blocks][on][blocks.logo-slider][populate][logos][populate][image][fields]': 'url',
-        'populate[blocks][on][blocks.hero][populate][titleImage][fields][0]': 'url',
-        'populate[blocks][on][blocks.hero][populate][titleImage][fields][1]': 'alternativeText',
         'populate[blocks][on][blocks.hero][populate][backgroundImage][fields]': 'url',
         'populate[blocks][on][blocks.newsletter][populate]': '*'
       }

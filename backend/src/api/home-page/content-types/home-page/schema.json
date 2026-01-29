@@ -23,11 +23,11 @@
         }
       },
       "components": [
-        "blocks.feature-grid",
-        "blocks.stats-section",
-        "blocks.service-section",
-        "blocks.logo-slider",
         "blocks.hero",
+        "blocks.logo-slider",
+        "blocks.service-section",
+        "blocks.stats-section",
+        "blocks.feature-grid",
         "blocks.newsletter"
       ]
     }

@@ -1,5 +1,7 @@
+import { HeroBlock, StatsSectionBlock, FeatureGridBlock, NewsletterBlock, aboutBlocks } from './types';
 // src/seeds/data.ts
 import type { 
+  navbarCta,
   NavbarLink, 
   NavbarDropdown, 
   HomePageData, 
@@ -7,13 +9,18 @@ import type {
   TeamMember,
   Service,
   HeroPageData,
-  Tag
-} from '../seeds/types';
+  Tag,
+  globalBlocks,
+  homeBlocks,
+  CategoryData,
+  MissionItem,
+  aboutPageData,
+  
+} from './types'; // 👈 Asegúrate que apunte a tu archivo local de types
 
 // =====================================================================
 // 1. NAVBAR DATA
 // =====================================================================
-
 
 export const navbarSeedData: (Omit<NavbarLink, 'id'> | Omit<NavbarDropdown, 'id'>)[] = [
   {
@@ -30,7 +37,7 @@ export const navbarSeedData: (Omit<NavbarLink, 'id'> | Omit<NavbarDropdown, 'id'
       {
         id: 0,
         __component: 'elements.navbar-links',
-        label: 'Diseño ',
+        label: 'Diseño',
         url: '/services/design',
         isExternal: false,
       },
@@ -53,13 +60,15 @@ export const navbarSeedData: (Omit<NavbarLink, 'id'> | Omit<NavbarDropdown, 'id'
     __component: 'elements.dropdown',
     label: 'nosotros',
     Links: [
-      {id: 0,
+      {
+        id: 0,
         __component: 'elements.navbar-links',
         label: 'Por qué Asome?',
         url: '/about',
         isExternal: false,
       },
-      {id: 0,
+      {
+        id: 0,
         __component: 'elements.navbar-links',
         label: 'Trabajá con nosotros',
         url: '/about/work-with-us',
@@ -75,37 +84,71 @@ export const navbarSeedData: (Omit<NavbarLink, 'id'> | Omit<NavbarDropdown, 'id'
   },
 ];
 
+
+
 // =====================================================================
-// 2. HOME PAGE DATA (Dynamic Zone Blocks)
+// 3. GLOBAL DATA
 // =====================================================================
 
-export const homePageSeedData: Omit<HomePageData, 'id'> = {
-  metaTitle: 'Asome - Automatización y Software',
-  blocks: [
-    // --- BLOCK: HERO ---
-    {
+export const globalSeedData: Omit<globalBlocks, 'id'> = {
+  navbarCta: {
+    label: 'Contacto',
+    url: '/contact',
+    isExternal: false,
+  },
+  mainMenu: navbarSeedData,
+  HeroPages: [
+      {
+        slug: 'about',
+        title: 'Conoce nuestros casos de exito',
+        description: 'Unimos estrategia y diseño para materializar soluciones'
+      },
+      {
+        slug: 'services',
+        title: 'Nuestros Servicios',
+        description: 'Combinamos estrategia, diseño y tecnología para crear soluciones digitales que impulsan resultados.'
+      },
+      
+    ]  
+}
+// =====================================================================
+// 2. HOME PAGE DATA
+// =====================================================================
+export const homePageSeedData: HomePageData = {
+    // --- BLOCK: HERO ---   
+    metaTitle: 'Inicio - Asome',
+    blocks: [    
+  {
       __component: 'blocks.hero',
-      id: 0, // Placeholder
-      titleImage: { url: '/uploads/hero-title.png' }, // Sube esta imagen manualmente o por script
-      subtitle: 'Deja de pelear con tus procesos. Empieza a escalar con automatización.',
+      id: 0, 
+      title: 'Dejá de pelear con tus procesos. Empezá a escalar con automatización.', 
+      subtitle: 'Sin costo y sin compromiso.',
       backgroundImage: { url: '/uploads/hero-bg.jpg' },
       buttonText: 'Agenda tu asesoría',
-      buttonLink: '/contact',
+      buttonUrl: '/contact',
       badge: 'Software, diseño y marketing para escalar tu empresa.',
     },
     // --- BLOCK: LOGO SLIDER ---
+    
     {
       __component: 'blocks.logo-slider',
       id: 0,
       title: 'Marcas que ya trabajaron con nosotros',
       logos: [
-        { id: 0, name: 'KTM', image: { url: '/uploads/logo1.png' } },
-        { id: 0, name: 'Husqavarna', image: { url: '/uploads/logo2.png' } },
-        { id: 0, name: 'Zeitune Inmobiliaria', image: { url: '/uploads/logo2.png' } },
-        { id: 0, name: 'Flexigom', image: { url: '/uploads/logo2.png' } },
+        { id: 0, name: 'KTM', image: { url: '/uploads/KTM.png' } },
+        { id: 0, name: 'Husqvarna', image: { url: '/uploads/Husqvarna.png' } }, // Corregido typo
+        { id: 0, name: 'Flexigom', image: { url: '/uploads/Flexigom.png' } },
       ],
     },
-     // --- BLOCK: STATS SECTION ---
+    {
+      __component: 'blocks.service-section',
+      id: 0,
+      title: 'Soluciones digitales que marcan un antes y después en tu negocio',
+      badge: 'NUESTROS SERVICIOS',
+      services: [
+        
+      ]
+    },
     {
       __component: 'blocks.stats-section',
       id: 0,
@@ -126,9 +169,12 @@ export const homePageSeedData: Omit<HomePageData, 'id'> = {
       title: '¿Por qué elegirnos?',
       badge: 'Nuestros Valores',
       features: [
-        { id: 0, title: 'Velocidad', description: 'Entregas rápidas y eficientes.' },
-        { id: 0, title: 'Calidad', description: 'Código limpio y escalable.' },
-        { id: 0, title: 'Soporte', description: 'Acompañamiento post-venta.' },
+        { id: 0, title: 'Excelencia', description: 'Altos estándares de entrega' },
+        { id: 0, title: 'Metodología', description: 'Para potenciar la innovación' },
+        { id: 0, title: 'Agilidad', description: 'Mejora continua como base de todos nuestros procesos' },
+        { id: 0, title: 'Ingeniería', description: 'Software adaptado a tus procesos' },
+        { id: 0, title: 'Transparencia', description: 'Sin tecnicismos, solo resultados claros' },
+        { id: 0, title: 'Escalabilidad', description: 'Tecnología que impulsa al crecimiento' },
       ],
     },
    
@@ -141,66 +187,11 @@ export const homePageSeedData: Omit<HomePageData, 'id'> = {
       placeholder: 'Email',
       buttonText: 'Suscribirse',
     },
-  ],
+  ]
 };
 
 // =====================================================================
-// 3. PROJECTS DATA (Collection Type)
-// =====================================================================
-
-export const projectsSeedData: Omit<Project, 'id'>[] = [
-  {
-    title: 'Plataforma Médica Integral',
-    slug: 'plataforma-medica',
-    introduction: 'Sistema de gestión para insumos ortopédicos.',
-    description: 'Desarrollamos una plataforma completa que permite gestionar stock...',
-    url: 'https://cliente.com',
-    buttonText: 'Ver Sitio Web',
-    buttonIcon: 'arrow-right',
-    imagePosition: 'right',
-    image: { url: '/uploads/project1-main.jpg' },
-    imageDescription: { url: '/uploads/project1-detail.jpg', alternativeText: 'Detalle del dashboard' },
-    tags: [
-      { id: 0, name: 'Angular', icon: 'angular-icon' },
-      { id: 0, name: 'NestJS', icon: 'nestjs-icon' },
-    ],
-    phases: [
-      {
-        id: 0,
-        PhaseName: 'Discovery',
-        description: 'Análisis de requerimientos y diseño UX.',
-        descriptionPosition: 'left',
-        IconText: [
-          { id: 0, text: 'Brainstorming', icon: 'brain' },
-          { id: 0, text: 'Wireframing', icon: 'pencil' },
-        ],
-      },
-      {
-        id: 0,
-        PhaseName: 'Desarrollo',
-        description: 'Implementación del código frontend y backend.',
-        descriptionPosition: 'right',
-        IconText: [
-          { id: 0, text: 'Frontend', icon: 'code' },
-          { id: 0, text: 'API Rest', icon: 'server' },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'E-commerce Genérico',
-    slug: 'ecommerce-app',
-    introduction: 'Tienda online escalable con pasarela de pagos.',
-    description: 'Una solución robusta para ventas online...',
-    imagePosition: 'left',
-    image: { url: '/uploads/project2-main.jpg' },
-    phases: [], // Sin fases detalladas
-    tags: [],
-  }
-];
-
-// =====================================================================
-// 4. TEAM MEMBERS DATA (Collection Type)
+// 4. ABOUT PAGE DATA
 // =====================================================================
 
 export const teamSeedData: Omit<TeamMember, 'id'>[] = [
@@ -261,57 +252,128 @@ export const teamSeedData: Omit<TeamMember, 'id'>[] = [
     },
   }
 ];
+export const missionVisionBlock = {
+  __component: 'blocks.mission-vision', // ⚠️ Verifica que este sea el nombre real en tu Schema
+  id: 0,
+  
+  mission: [
+    {
+      
+      badge: 'MISIÓN',
+      title: 'Nuestra Misión',
+      description: 'Brindar soluciones integrales de software, marketing y diseño que trasciendan lo visual. Queremos generar resultados reales, donde cada decisión creativa esté respaldada por datos y orientada al máximo performance.',
+      
+    },
+  ],
+
+  vision: [
+    {
+      badge: 'VISIÓN',
+      title: 'Nuestra Visión',
+      description: 'Liderar la evolución digital de las empresas, redefiniendo los estándares con los que las marcas se proyectan, conectan y escalan para alcanzar un crecimiento sin límites.',
+    },
+  ],
+};
+export const aboutPageSeedData: aboutPageData  = {
+  blocks: [
+    {
+      __component: 'blocks.members-section',
+        members: teamSeedData,
+    },
+    {
+      __component: 'blocks.mission-vision',
+        mission: missionVisionBlock.mission,
+        vision: missionVisionBlock.vision,
+    },
+    {
+      __component: 'blocks.feature-grid',
+      badge: 'Nuestros Valores',
+      title: '¿Por qué elegir Asome?',
+      features: [
+        {  title: 'Igualdad', description: 'ACreemos en una cultura horizontal donde cada voz tiene el mismo peso. En Asome no hay jerarquías, sino un equipo de pares colaborando con un propósito común.' },
+        {  title: 'Autonomía', description: 'Empoderamos el talento. Confiamos en la capacidad de nuestro equipo para tomar decisiones con criterio propio, fomentando la responsabilidad y la excelencia en cada paso.' },
+        {
+          title: 'Pertenencia', description: 'Más que socios, somos una comunidad. No te vemos como un cliente, sos parte de Asome: aquí trabajamos codo a codo para que tu proyecto sea también el nuestro.'
+        },
+        {
+          title: 'Organización', description: 'Nada queda librado al azar. Trabajamos bajo un método riguroso, con planes estratégicos y objetivos claros que aseguran resultados tangibles.'
+        },
+        {
+          title: 'Transparencia', description: 'Construimos relaciones basadas en la verdad. La honestidad y la comunicación abierta son los pilares fundamentales que sostienen nuestro vínculo con vos y con nuestro equipo.'
+        }
+
+  ]}
+  ],
+};
 
 // =====================================================================
-// 5. SERVICES DATA (Si son Collection Type)
+// 5. SERVICES DATA
 // =====================================================================
-
+export const servicesCategorySeedData: Omit<CategoryData, 'id'>[] = [
+  { slug: 'software', badge: 'DESARROLLO DE SOFTWARE', title: 'Marcamos un antes y un después en tu negocio.', metaTitle: 'Servicios de Software - Asome'},
+  { slug: 'design', badge: 'DISEÑO GRÁFICO', title: 'Marcamos un antes y un después en tu negocio.', metaTitle: 'Servicios de Diseño - Asome'},
+  { slug: 'marketing', badge: 'MARKETING DIGITAL', title: 'Marcamos un antes y un después en tu negocio.', metaTitle: 'Servicios de Marketing - Asome'},
+  
+]
 export const servicesSeedData: Omit<Service, 'id'>[] = [
-  {
-    title: 'Apps Móviles',
-    slug: 'apps-moviles',
-    category: 'software',
-    imagePosition: 'left',
-    coverImage: { url: '/uploads/placeholder-service.jpg' },
-    tags: [], 
-  },
-  {
-    title: 'Apps Móviles',
-    slug: 'apps-moviles',
-    category: 'design',
-    imagePosition: 'left',
-    coverImage: { url: '/uploads/placeholder-service.jpg' },
-    tags: [], 
-  },
-  {
-    title: 'Cloud Computing',
-    slug: 'cloud-computing',
-    category: 'software',
-    imagePosition: 'left',
+    {
+    title: 'Sistemas y Desarrollo a Medida',
+    slug: 'sistemas-desarrollo-medida',
+    category: 'none', // CAMBIO: 'none' no existe en tus types
+    imagePosition: 'right',
     coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
   {
     title: 'Diseño Gráfico',
     slug: 'diseno-grafico',
-    category: 'none',
+    category: 'none', // CAMBIO: 'none' no existe en tus types
     imagePosition: 'left',
     coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
+{
+    title: 'Marketing Digital',
+    slug: 'marketing-digital',
+    category: 'none', // CAMBIO: 'none' no existe en tus types
+    imagePosition: 'right',
+    coverImage: { url: '/uploads/placeholder-service.jpg' },
+    tags: [],
+  },
+  ,{
+    title: 'Apps Móviles',
+    slug: 'apps-moviles',
+    category: 'software',
+    imagePosition: 'right',
+    tags: [], 
+  },
+  {
+    title: 'Diseño de Apps', // CAMBIO: Título distinto para evitar confusión
+    slug: 'diseno-apps',     // CAMBIO: Slug único (antes era apps-moviles duplicado)
+    category: 'design',
+    imagePosition: 'right',
+    tags: [], 
+  },
+  {
+    title: 'Cloud Computing',
+    slug: 'cloud-computing',
+    category: 'software',
+    imagePosition: 'right',
+    tags: [],
+  },
+  
   {
     title: 'IA & Automation',
     slug: 'ia-automation',
     category: 'software',
     imagePosition: 'left',
-    coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
   {
     title: 'Manejo de Redes Sociales',
     slug: 'manejo-redes-sociales',
     category: 'marketing',
-    imagePosition: 'left',
+    imagePosition: 'right',
     coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
@@ -319,18 +381,11 @@ export const servicesSeedData: Omit<Service, 'id'>[] = [
     title: 'Manuales de marca',
     slug: 'manuales-marca',
     category: 'design',
-    imagePosition: 'left',
+    imagePosition: 'right',
     coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
-  {
-    title: 'Marketing Digital',
-    slug: 'marketing-digital',
-    category: 'none',
-    imagePosition: 'left',
-    coverImage: { url: '/uploads/placeholder-service.jpg' },
-    tags: [],
-  },
+  
   {
     title: 'SEM',
     slug: 'sem',
@@ -343,18 +398,11 @@ export const servicesSeedData: Omit<Service, 'id'>[] = [
     title: 'SEO',
     slug: 'seo',
     category: 'marketing',
-    imagePosition: 'left',
+    imagePosition: 'right',
     coverImage: { url: '/uploads/placeholder-service.jpg' },
     tags: [],
   },
-  {
-    title: 'Sistemas y Desarrollo a Medida',
-    slug: 'sistemas-desarrollo-medida',
-    category: 'none',
-    imagePosition: 'left',
-    coverImage: { url: '/uploads/placeholder-service.jpg' },
-    tags: [],
-  },
+  
   {
     title: 'UX/UI',
     slug: 'ux-ui',
@@ -366,7 +414,7 @@ export const servicesSeedData: Omit<Service, 'id'>[] = [
 ];
 
 // =====================================================================
-// 6. TAGS DATA (Collection Type)
+// 6. TAGS DATA
 // =====================================================================
 
 export const tagsSeedData: Omit<Tag, 'id'>[] = [

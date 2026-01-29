@@ -5,24 +5,24 @@ export interface NavbarLink {
   isExternal: boolean;
   __component: 'elements.navbar-links';
 }
-
+export type navbarCta = NavbarLink
 export interface NavbarDropdown {
   id: number;
   label: string;
   Links: NavbarLink[]; 
   __component: 'elements.dropdown';
 }
-
+export type mainMenu = MenuItem[];
 export type MenuItem = NavbarLink | NavbarDropdown;
 
 export interface FeatureCard {
-  id: number;
+  id?: number;
   title: string;
   description: string;
 }
 
 export interface FeatureGridBlock {
-  id: number;
+  id?: number;
   __component: 'blocks.feature-grid';
   badge?: string;
   title: string;
@@ -58,13 +58,18 @@ export interface ServiceSectionBlock {
   badge?: string;
   services: Service[];
 }
-
+export type aboutBlocks = MembersSectionBlock | FeatureGridBlock | MissionBlock
+export type globalBlocks = HeroPageData[] | mainMenu | navbarCta;
 export type AnyBlock =  MembersSectionBlock |FeatureGridBlock | StatsSectionBlock | ServiceSectionBlock | LogoSliderBlock | HeroBlock | NewsletterBlock; 
-
+export type homeBlocks = FeatureGridBlock | StatsSectionBlock | ServiceSectionBlock | LogoSliderBlock | HeroBlock | NewsletterBlock; 
 export interface HomePageData {
   metaTitle: string
-  blocks: AnyBlock[]
+  blocks: homeBlocks[]
 }
+export interface aboutPageData {
+  blocks: aboutBlocks[]
+}
+
 export interface LogoItem {
   id: number;
   name: string;
@@ -82,13 +87,13 @@ export interface LogoSliderBlock {
 export interface HeroBlock {
   id: number;
   __component: 'blocks.hero';
-  titleImage: any; 
+  title: string; 
   subtitle?: string;
   backgroundImage?:{
     url: string;
   };
   buttonText?: string;
-  buttonLink?: string;
+  buttonUrl?: string;
   badge?: string;
 }
 export interface NewsletterBlock {
@@ -106,7 +111,7 @@ export interface Service {
   slug: string;
   category: 'software' | 'design' | 'marketing' | 'none'; 
   imagePosition: 'left' | 'right';
-  coverImage: {
+  coverImage?: {
     url: string;
   };
   tags: Tag[];
@@ -118,7 +123,7 @@ export interface CategoryData {
   metaTitle: string;
 }
 export interface HeroPageData {
-  id: number;
+  id?: number;
   slug: string;
   title: string;
   description: string;
@@ -174,7 +179,7 @@ export interface Project {
   imagePosition: 'left' | 'right';
 }
 export interface TeamMember {
-  id: number;
+  id?: number;
   name: string;
   role: string;
   linkedinUrl?: string;
@@ -191,15 +196,20 @@ export interface TeamMember {
 
 export interface MembersSectionBlock {
   __component: 'blocks.members-section';
-  id: number;
+  id?: number;
   members: TeamMember[];
 }
+export interface MissionBlock {
+  __component: 'blocks.mission-vision';
+  mission: MissionItem[];
+  vision: MissionItem[];
+}
 export interface MissionItem {
-  id: number;
+  id?: number;
   badge: string;
   title: string;
   description: string;
-  backGroundImage: {
+  backGroundImage?: {
     url: string;
   };
 }

@@ -5,16 +5,6 @@
   },
   "options": {},
   "attributes": {
-    "titleImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "subtitle": {
       "type": "string"
     },
@@ -35,6 +25,9 @@
       "type": "string"
     },
     "badge": {
+      "type": "string"
+    },
+    "title": {
       "type": "string"
     }
   },

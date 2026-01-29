@@ -82,7 +82,7 @@ export interface LogoSliderBlock {
 export interface HeroBlock {
   id: number;
   __component: 'blocks.hero';
-  titleImage: any; 
+  title: string; 
   subtitle?: string;
   backgroundImage?:{
     url: string;

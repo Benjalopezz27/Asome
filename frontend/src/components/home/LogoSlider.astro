@@ -28,16 +28,29 @@ const infiniteLogos = [...logos, ...logos, ...logos, ...logos];
     <div class="w-full md:w-3/4 relative overflow-hidden mask-gradient">
       <div class="flex items-center gap-16 animate-infinite-scroll w-max">
         {
-          infiniteLogos.map((logo, index) => (
-            <div class="relative w-40 h-20 md:w-48 md:h-24 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer">
-              <img
-                src={getImageUrl(logo.image.url)}
-                alt={logo.name}
-                class="max-w-full max-h-full object-contain"
-                loading={index < 5 ? "eager" : "lazy"}
-              />
-            </div>
-          ))
+          infiniteLogos.map((logo, index) => {
+            // 1. Intentamos sacar la URL de forma segura usando optional chaining (?.)
+            const imgUrl = logo.image?.url;
+
+            return (
+              <div class="relative w-40 h-20 md:w-48 md:h-24 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer">
+                {/* 2. Condicional: ¿Existe la URL? */}
+                {imgUrl ? (
+                  <img
+                    src={getImageUrl(imgUrl)}
+                    alt={logo.name}
+                    class="max-w-full max-h-full object-contain"
+                    loading={index < 5 ? "eager" : "lazy"}
+                  />
+                ) : (
+                  /* 3. Fallback: Si no hay imagen, mostramos el nombre como texto */
+                  <span class="text-gray-400 font-semibold text-sm text-center px-2">
+                    {logo.name}
+                  </span>
+                )}
+              </div>
+            );
+          })
         }
       </div>
     </div>
